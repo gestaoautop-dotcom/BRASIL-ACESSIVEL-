@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Departamento de ideias malucas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app" aria-live="polite">
+    <section class="screen screen--intro is-active" id="page-1" aria-label="Página 1">
+      <div class="intro-wrap">
+        <h1>Departamento de<br class="desktop-break"> ideias malucas</h1>
+        <button class="enter-btn" id="enterBtn" type="button"><span>Estou ciente e desejo continuar</span><span class="arrow">→</span></button>
+      </div>
+      <div class="hint">clique para entrar</div>
+    </section>
+    <section class="screen screen--politics" id="page-2" aria-label="Página 2">
+      <div class="politics-stage">
+        <div class="eyebrow">PÁGINA 02</div>
+        <h2>Desenrolando a política Brasileira</h2>
+        <div class="animation-shell">
+          <img src="assets/politica-loop.gif" alt="Ilustração animada de um novelo colorido representando a política brasileira sendo desenrolada" />
+          <div class="float-dot dot-a"></div><div class="float-dot dot-b"></div><div class="float-dot dot-c"></div>
+        </div>
+        <button class="next-btn" id="nextBtn" type="button" aria-label="Ir para a próxima página">→</button>
+      </div>
+      <button class="back-btn" id="backBtn" type="button" aria-label="Voltar">←</button>
+    </section>
+    <section class="screen screen--placeholder" id="page-3" aria-label="Página 3">
+      <div><span>03</span><h2>Próxima ideia<br>em construção.</h2></div>
+      <button class="back-btn" id="backBtn3" type="button" aria-label="Voltar">←</button>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
