@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-walk06">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-glasswalk06">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -102,7 +102,7 @@
          <div class="leg leg-front"><span class="shoe"></span></div>
        </div>
      </div>
-     <div class="belt-hint"><span>→</span> ARRASTE OS PASSOS PARA A DIREITA</div>
+     <div class="belt-hint"><span>→</span> ARRASTE OS PASSOS →</div>
    </div>
 
    <div class="trace-ending">Tudo passa.<br><strong>O RASTRO FICA.</strong></div>
@@ -188,19 +188,26 @@ function normalizeTrack(){
 function walkRight(delta){
  if(!road||!track||!walker||delta<=0)return;
  const rr=road.getBoundingClientRect(),wr=walker.getBoundingClientRect();
- walkerX=Math.min(rr.width-wr.width-16,walkerX+delta*.52);
- walker.style.transform='translateX('+walkerX+'px)';
- walker.classList.add('walking');
+ walkerX+=delta*.62;
 
  trackX-=delta*.72;
  normalizeTrack();
 
  const now=performance.now();
- if(now-lastCrumbAt>95){
-   const wx=walker.getBoundingClientRect().left;
-   const candidates=[...road.querySelectorAll('[data-trace]')].filter(ch=>{const r=ch.getBoundingClientRect();return r.right<wx-6 && r.right>wx-190});
+ const walkerScreenLeft=rr.left+walkerX;
+ if(now-lastCrumbAt>90){
+   const candidates=[...road.querySelectorAll('[data-trace]')].filter(ch=>{const r=ch.getBoundingClientRect();return r.right<walkerScreenLeft-4 && r.right>walkerScreenLeft-210});
    if(candidates.length)makeCrumbs(candidates[candidates.length-1]);
    lastCrumbAt=now;
+ }
+
+ if(walkerX>rr.width-wr.width+26){
+   walker.classList.add('reentering');
+   walkerX=-wr.width-28;
+   walker.style.transform='translateX('+walkerX+'px)';
+   requestAnimationFrame(()=>requestAnimationFrame(()=>walker.classList.remove('reentering')));
+ }else{
+   walker.style.transform='translateX('+walkerX+'px)';
  }
 }
 
