@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-arrows-only">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-navfix2">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -115,166 +115,37 @@ const order=screens.map(s=>s.id);
 let currentIndex=Math.max(0,screens.findIndex(s=>s.classList.contains('is-active')));
 
 function show(id,direction=1){
-  const nextIndex=order.indexOf(id);
-  if(nextIndex<0||nextIndex===currentIndex)return;
-  const current=screens[currentIndex];
-  const next=screens[nextIndex];
-
-  current.classList.remove('slide-out-left','slide-out-right');
-  next.classList.remove('slide-out-left','slide-out-right');
-
-  current.classList.add(direction>0?'slide-out-left':'slide-out-right');
-  current.classList.remove('is-active');
-  next.classList.add('is-active');
-  currentIndex=nextIndex;
-
-  setTimeout(()=>current.classList.remove('slide-out-left','slide-out-right'),650);
-
-  if(id==='page-3') startSurveillanceLoop();
-  else stopSurveillanceLoop();
-
-  if(id==='page-5' && direction>0) launchFloatCards();
+ const ni=order.indexOf(id); if(ni<0||ni===currentIndex)return;
+ const cur=screens[currentIndex],next=screens[ni];
+ cur.classList.remove('slide-out-left','slide-out-right');
+ next.classList.remove('slide-out-left','slide-out-right');
+ cur.classList.add(direction>0?'slide-out-left':'slide-out-right');
+ cur.classList.remove('is-active'); next.classList.add('is-active'); currentIndex=ni;
+ setTimeout(()=>cur.classList.remove('slide-out-left','slide-out-right'),650);
+ if(id==='page-3')startSurveillanceLoop();else stopSurveillanceLoop();
+ if(id==='page-5'&&direction>0)launchFloatCards();
 }
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();show(b.dataset.next,1)}));
+document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();show(b.dataset.prev,-1)}));
 
-document.querySelectorAll('[data-next]').forEach(b=>{
-  b.addEventListener('click',()=>show(b.dataset.next,1));
-});
-document.querySelectorAll('[data-prev]').forEach(b=>{
-  b.addEventListener('click',()=>show(b.dataset.prev,-1));
-});
+const words=['FILMADO','OBSERVADO','OUVIDO','RASTREADO'];let st=null,si=0;
+function startSurveillanceLoop(){const el=document.getElementById('surveillanceWord');if(!el)return;clearInterval(st);si=0;el.textContent=words[0];st=setInterval(()=>{el.classList.add('swap');setTimeout(()=>{si=(si+1)%words.length;el.textContent=words[si];el.classList.remove('swap')},140)},760)}
+function stopSurveillanceLoop(){clearInterval(st);st=null}
 
+const moodToggle=document.getElementById('moodToggle'),page4=document.getElementById('page-4');
+if(moodToggle&&page4){let bad=false;moodToggle.addEventListener('click',e=>{e.stopPropagation();bad=!bad;page4.classList.toggle('mood-bad-state',bad)})}
 
-/* Página 03 */
-const surveillanceWords=['FILMADO','OBSERVADO','OUVIDO','RASTREADO'];
-let surveillanceTimer=null;
-let surveillanceIndex=0;
-
-function startSurveillanceLoop(){
-  const el=document.getElementById('surveillanceWord');
-  if(!el) return;
-  clearInterval(surveillanceTimer);
-  surveillanceIndex=0;
-  el.textContent=surveillanceWords[0];
-  surveillanceTimer=function dissolveTrace(chip){
- if(chip.classList.contains('dissolving')) return;
- const road=document.getElementById('perspectiveRoad');
- if(!road)return;
- const rr=road.getBoundingClientRect(), cr=chip.getBoundingClientRect();
- const layer=document.createElement('div');
- layer.className='digital-spill';
- layer.style.left=(cr.left-rr.left+cr.width/2)+'px';
- layer.style.top=(cr.top-rr.top+cr.height/2)+'px';
- const chars='010101001101HASHDATA{}[]<>/\\';
- for(let i=0;i<34;i++){
-   const bit=document.createElement('i');
-   bit.textContent=chars[Math.floor(Math.random()*chars.length)];
-   bit.style.setProperty('--x',((Math.random()-.5)*150)+'px');
-   bit.style.setProperty('--y',(35+Math.random()*155)+'px');
-   bit.style.setProperty('--r',((Math.random()-.5)*90)+'deg');
-   bit.style.setProperty('--d',(Math.random()*180)+'ms');
-   layer.appendChild(bit);
- }
- road.appendChild(layer);
- chip.classList.add('dissolving');
- setTimeout(()=>{
-   layer.remove();
-   chip.classList.remove('dissolving');
-   chip.dataset.manual='';
- },1250);
-}
-
-setInterval(()=>{
-    el.classList.add('swap');
-    setTimeout(()=>{
-      surveillanceIndex=(surveillanceIndex+1)%surveillanceWords.length;
-      el.textContent=surveillanceWords[surveillanceIndex];
-      el.classList.remove('swap');
-    },140);
-  },760);
-}
-function stopSurveillanceLoop(){
-  clearInterval(surveillanceTimer);
-  surveillanceTimer=null;
-}
-
-/* Página 04 */
-const moodToggle=document.getElementById('moodToggle');
-const page4=document.getElementById('page-4');
-if(moodToggle&&page4){
-  let bad=false;
-  page4.classList.remove('mood-good','mood-bad-state');
-  moodToggle.addEventListener('click',()=>{
-    bad=!bad;
-    page4.classList.toggle('mood-bad-state',bad);
-  });
-}
-
-/* Página 05 — placas livres */
 const floatStage=document.getElementById('floatStage');
-function launchFloatCards(){
- const cards=[...document.querySelectorAll('[data-float]')];
- cards.forEach((card,i)=>{
-   card.classList.remove('arrived');
-   card.classList.add('incoming');
-   card.style.setProperty('--enter-delay',(i*85)+'ms');
- });
- requestAnimationFrame(()=>requestAnimationFrame(()=>{
-   cards.forEach(card=>{card.classList.add('arrived');});
-   setTimeout(()=>cards.forEach(card=>card.classList.remove('incoming','arrived')),1500);
- }));
-}
+function launchFloatCards(){document.querySelectorAll('[data-float]').forEach((c,i)=>{c.classList.remove('arrived');c.classList.add('incoming');c.style.setProperty('--enter-delay',(i*85)+'ms')});requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('[data-float]').forEach(c=>c.classList.add('arrived'))));setTimeout(()=>document.querySelectorAll('[data-float]').forEach(c=>c.classList.remove('incoming','arrived')),1500)}
+document.querySelectorAll('[data-float]').forEach(card=>{let drag=false,dx=0,dy=0;card.addEventListener('pointerdown',e=>{drag=true;const r=card.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;card.setPointerCapture?.(e.pointerId);card.classList.add('dragging');e.stopPropagation()});card.addEventListener('pointermove',e=>{if(!drag||!floatStage)return;const s=floatStage.getBoundingClientRect(),r=card.getBoundingClientRect();let x=Math.max(0,Math.min(s.width-r.width,e.clientX-s.left-dx)),y=Math.max(0,Math.min(s.height-r.height,e.clientY-s.top-dy));card.style.left=x+'px';card.style.top=y+'px';card.style.right='auto';card.style.bottom='auto';card.style.transform='none';e.stopPropagation()});card.addEventListener('pointerup',e=>{drag=false;card.classList.remove('dragging');e.stopPropagation()});});
 
-const floatCards=[...document.querySelectorAll('[data-float]')];
-floatCards.forEach(card=>{
- let dragging=false,dx=0,dy=0;
- const down=e=>{
-   dragging=true;
-   const p=e.touches?e.touches[0]:e;
-   const r=card.getBoundingClientRect();
-   dx=p.clientX-r.left; dy=p.clientY-r.top;
-   card.classList.add('dragging');
-   e.stopPropagation();
- };
- const move=e=>{
-   if(!dragging||!floatStage)return;
-   const p=e.touches?e.touches[0]:e;
-   const sr=floatStage.getBoundingClientRect();
-   const cr=card.getBoundingClientRect();
-   let x=p.clientX-sr.left-dx, y=p.clientY-sr.top-dy;
-   x=Math.max(0,Math.min(sr.width-cr.width,x));
-   y=Math.max(0,Math.min(sr.height-cr.height,y));
-
-   const copy=floatStage.querySelector('.float-copy');
-   if(copy){
-     const rr=copy.getBoundingClientRect();
-     const nx=sr.left+x, ny=sr.top+y;
-     const overlap=nx<rr.right+18 && nx+cr.width>rr.left-18 && ny<rr.bottom+18 && ny+cr.height>rr.top-18;
-     if(overlap){
-       const dl=Math.abs((nx+cr.width)-rr.left);
-       const dr=Math.abs(nx-rr.right);
-       const dt=Math.abs((ny+cr.height)-rr.top);
-       const db=Math.abs(ny-rr.bottom);
-       const m=Math.min(dl,dr,dt,db);
-       if(m===dl) x=Math.max(0,rr.left-sr.left-cr.width-18);
-       else if(m===dr) x=Math.min(sr.width-cr.width,rr.right-sr.left+18);
-       else if(m===dt) y=Math.max(0,rr.top-sr.top-cr.height-18);
-       else y=Math.min(sr.height-cr.height,rr.bottom-sr.top+18);
-     }
-   }
-
-   card.style.left=x+'px'; card.style.top=y+'px';
-   card.style.right='auto'; card.style.bottom='auto';
-   card.style.transform='none';
-   if(e.cancelable)e.preventDefault();
- };
- const up=()=>{dragging=false;card.classList.remove('dragging')};
- card.addEventListener('mousedown',down);
- card.addEventListener('touchstart',down,{passive:false});
- window.addEventListener('mousemove',move);
- window.addEventListener('touchmove',move,{passive:false});
- window.addEventListener('mouseup',up);
- window.addEventListener('touchend',up);
-});
+const road=document.getElementById('perspectiveRoad'),track=document.getElementById('conveyorTrack');let bd=false,last=0,off=0;
+function spill(chip){if(!road)return;const rr=road.getBoundingClientRect(),cr=chip.getBoundingClientRect(),layer=document.createElement('div');layer.className='digital-spill';layer.style.left=(cr.left-rr.left+cr.width/2)+'px';layer.style.top=(cr.top-rr.top+cr.height/2)+'px';const chars='0101HASHDATA{}[]<>/';for(let i=0;i<14;i++){const bit=document.createElement('i');bit.textContent=chars[Math.floor(Math.random()*chars.length)];bit.style.setProperty('--x',((Math.random()-.5)*100)+'px');bit.style.setProperty('--y',(25+Math.random()*100)+'px');bit.style.setProperty('--r',((Math.random()-.5)*80)+'deg');bit.style.setProperty('--d',(Math.random()*100)+'ms');layer.appendChild(bit)}road.appendChild(layer);setTimeout(()=>layer.remove(),1100);chip.classList.remove('belt-dissolve');void chip.offsetWidth;chip.classList.add('belt-dissolve');setTimeout(()=>chip.classList.remove('belt-dissolve'),720)}
+function moveBelt(d){if(!track)return;off+=d;track.style.transform='translateX('+off+'px)';if(Math.abs(d)>2)document.querySelectorAll('#page-6 [data-trace]').forEach((c,i)=>{if((i+Math.round(Math.abs(off)/35))%2===0)spill(c)});if(Math.abs(off)>180){off=0;track.style.transform='translateX(0)'}}
+road?.addEventListener('pointerdown',e=>{bd=true;last=e.clientX;road.setPointerCapture?.(e.pointerId);road.classList.add('is-dragging');e.stopPropagation()});
+road?.addEventListener('pointermove',e=>{if(!bd)return;const d=e.clientX-last;last=e.clientX;moveBelt(d);e.stopPropagation()});
+road?.addEventListener('pointerup',e=>{bd=false;road.classList.remove('is-dragging');e.stopPropagation()});
+road?.addEventListener('wheel',e=>{e.preventDefault();e.stopPropagation();moveBelt((e.deltaX||e.deltaY)*-.18)},{passive:false});
 </script></body></html/* Página 06 — esteira de rastros */
 const traceRoad=document.getElementById('perspectiveRoad');
 const conveyorTrack=document.getElementById('conveyorTrack');
