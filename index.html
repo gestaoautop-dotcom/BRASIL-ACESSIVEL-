@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-0415">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-0505">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -45,11 +45,35 @@
  <button class="next" data-next="page-5">→</button>
 </section>
 
-<section class="screen manifesto data-page" id="page-5">
+<section class="screen manifesto data-page roulette-page" id="page-5">
  <button class="back" data-prev="page-4">←</button>
- <div class="center"><small>05</small><h2>ENTÃO VAMOS USAR<br>ISSO A NOSSO FAVOR.</h2>
- <div class="data-orbit"><b>FATOS</b><span>DADOS</span><span>SATÉLITES</span><span>REGISTROS</span><span>CRIPTOGRAFIA</span><span>FONTES</span></div>
- <p>Diferentes fontes. Cruzamentos. Registros reais.</p></div>
+ <div class="roulette-layout">
+   <div class="roulette-side">
+     <small>05</small>
+     <div class="roulette-window" id="rouletteWindow" aria-label="Fontes e tecnologias">
+       <div class="roulette-track" id="rouletteTrack">
+         <button class="roulette-item">DADOS</button>
+         <button class="roulette-item">SATÉLITES</button>
+         <button class="roulette-item">REGISTROS</button>
+         <button class="roulette-item">CRIPTOGRAFIA</button>
+         <button class="roulette-item">FONTES PÚBLICAS</button>
+         <button class="roulette-item">AUDITORIAS</button>
+         <button class="roulette-item">BACKUPS</button>
+         <button class="roulette-item">CYBERSEGURANÇA</button>
+       </div>
+       <div class="roulette-focus" aria-hidden="true"></div>
+     </div>
+     <div class="roulette-controls">
+       <button id="rouletteUp" type="button" aria-label="Subir">↑</button>
+       <button id="rouletteDown" type="button" aria-label="Descer">↓</button>
+     </div>
+   </div>
+   <div class="roulette-copy">
+     <div class="mini-label">ENTÃO VAMOS</div>
+     <h2>USAR ISSO<br>A NOSSO FAVOR.</h2>
+     <p>Diferentes fontes. Cruzamentos. Registros reais.</p>
+   </div>
+ </div>
  <button class="next" data-next="page-6">→</button>
 </section>
 
@@ -76,4 +100,4 @@
  <button class="pill inverse">ENTENDER O BRASIL <b>→</b></button></div>
 </section>
 
-</main><script src="script.js?v=20261005-0415"></script></body></html>
+</main><script src="script.js?v=20261005-0505"></script></body></html>
