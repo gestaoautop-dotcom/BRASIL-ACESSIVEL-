@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-belt06">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-arrows-only">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -143,27 +143,6 @@ document.querySelectorAll('[data-prev]').forEach(b=>{
   b.addEventListener('click',()=>show(b.dataset.prev,-1));
 });
 
-function step(dir){
-  const nextIndex=(currentIndex+dir+screens.length)%screens.length;
-  show(order[nextIndex],dir);
-}
-
-window.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight') step(1);
-  if(e.key==='ArrowLeft') step(-1);
-});
-
-let pageTouchX=0;
-window.addEventListener('touchstart',e=>{
-  pageTouchX=e.changedTouches[0].clientX;
-},{passive:true});
-
-window.addEventListener('touchend',e=>{
-  const target=e.target.closest?.('#rouletteWindow');
-  if(target) return;
-  const delta=e.changedTouches[0].clientX-pageTouchX;
-  if(Math.abs(delta)>55) step(delta<0?1:-1);
-},{passive:true});
 
 /* Página 03 */
 const surveillanceWords=['FILMADO','OBSERVADO','OUVIDO','RASTREADO'];
