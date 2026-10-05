@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-flow05">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-brand05">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -50,6 +50,7 @@
  <div class="float-stage" id="floatStage">
    <small>05</small>
    <div class="float-copy"><div class="mini-label">ENTÃO VAMOS</div><h2>USAR ISSO<br>A NOSSO FAVOR.</h2><p>Diferentes fontes. Cruzamentos. Registros reais.</p></div>
+   <div class="drag-hint" aria-hidden="true"><span>↔</span> mova as palavras</div>
    <button class="float-card fc1" data-float>DADOS</button>
    <button class="float-card fc2" data-float>SATÉLITES</button>
    <button class="float-card fc3" data-float>REGISTROS</button>
@@ -212,6 +213,25 @@ floatCards.forEach(card=>{
    let x=p.clientX-sr.left-dx, y=p.clientY-sr.top-dy;
    x=Math.max(0,Math.min(sr.width-cr.width,x));
    y=Math.max(0,Math.min(sr.height-cr.height,y));
+
+   const copy=floatStage.querySelector('.float-copy');
+   if(copy){
+     const rr=copy.getBoundingClientRect();
+     const nx=sr.left+x, ny=sr.top+y;
+     const overlap=nx<rr.right+18 && nx+cr.width>rr.left-18 && ny<rr.bottom+18 && ny+cr.height>rr.top-18;
+     if(overlap){
+       const dl=Math.abs((nx+cr.width)-rr.left);
+       const dr=Math.abs(nx-rr.right);
+       const dt=Math.abs((ny+cr.height)-rr.top);
+       const db=Math.abs(ny-rr.bottom);
+       const m=Math.min(dl,dr,dt,db);
+       if(m===dl) x=Math.max(0,rr.left-sr.left-cr.width-18);
+       else if(m===dr) x=Math.min(sr.width-cr.width,rr.right-sr.left+18);
+       else if(m===dt) y=Math.max(0,rr.top-sr.top-cr.height-18);
+       else y=Math.min(sr.height-cr.height,rr.bottom-sr.top+18);
+     }
+   }
+
    card.style.left=x+'px'; card.style.top=y+'px';
    card.style.right='auto'; card.style.bottom='auto';
    card.style.transform='none';
