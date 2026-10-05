@@ -28,10 +28,10 @@ let surveillanceTimer;
 function surveillanceLoop(){const el=document.getElementById("surveillanceWord");if(!el)return;let i=0;clearInterval(surveillanceTimer);el.textContent=surveillanceWords[0];surveillanceTimer=setInterval(()=>{el.classList.add("swap");setTimeout(()=>{i=(i+1)%surveillanceWords.length;el.textContent=surveillanceWords[i];el.classList.remove("swap")},140)},760)}
 const moodToggle=document.getElementById('moodToggle'),page4=document.getElementById('page-4');
 if(moodToggle&&page4){
- let good=false;
- page4.classList.remove('mood-good');
+ let bad=false;
+ page4.classList.remove('mood-good','mood-bad-state');
  moodToggle.addEventListener('click',()=>{
-   good=!good;
-   page4.classList.toggle('mood-good',good);
+   bad=!bad;
+   page4.classList.toggle('mood-bad-state',bad);
  });
 }
