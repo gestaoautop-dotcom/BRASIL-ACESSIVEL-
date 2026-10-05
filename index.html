@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-glasswalk06">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-giantwalk06">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -102,7 +102,7 @@
          <div class="leg leg-front"><span class="shoe"></span></div>
        </div>
      </div>
-     <div class="belt-hint"><span>→</span> ARRASTE OS PASSOS →</div>
+     <div class="road-arrows" aria-hidden="true"><span>‹</span><span>‹</span><span>›</span><span>›</span></div>
    </div>
 
    <div class="trace-ending">Tudo passa.<br><strong>O RASTRO FICA.</strong></div>
@@ -201,9 +201,9 @@ function walkRight(delta){
    lastCrumbAt=now;
  }
 
- if(walkerX>rr.width-wr.width+26){
+ if(walkerX>rr.width+12){
    walker.classList.add('reentering');
-   walkerX=-wr.width-28;
+   walkerX=-wr.width-40;
    walker.style.transform='translateX('+walkerX+'px)';
    requestAnimationFrame(()=>requestAnimationFrame(()=>walker.classList.remove('reentering')));
  }else{
@@ -212,7 +212,7 @@ function walkRight(delta){
 }
 
 walker?.addEventListener('pointerdown',e=>{walking=true;lastX=e.clientX;walker.setPointerCapture?.(e.pointerId);walker.classList.add('walking');e.stopPropagation()});
-walker?.addEventListener('pointermove',e=>{if(!walking)return;const d=e.clientX-lastX;lastX=e.clientX;if(d>0.5)walkRight(d);e.stopPropagation()});
+walker?.addEventListener('pointermove',e=>{if(!walking)return;const d=e.clientX-lastX;lastX=e.clientX;if(Math.abs(d)>.5)walkRight(Math.abs(d));e.stopPropagation()});
 walker?.addEventListener('pointerup',e=>{walking=false;walker.classList.remove('walking');e.stopPropagation()});
 walker?.addEventListener('pointercancel',()=>{walking=false;walker.classList.remove('walking')});
 </script></body></html/* Página 06 — esteira de rastros */
