@@ -257,3 +257,30 @@
  .conveyor-page .trace-chip{min-width:118px;padding:14px 15px;font-size:3vw!important}
  .conveyor-page .trace-ending{bottom:5%;font-size:6vw}
 }
+
+/* PAGE 06D — palavras sempre visiveis + passos laterais */
+.conveyor-page .conveyor{overflow:hidden}
+.conveyor-page .conveyor-track{left:0!important;top:44%;display:flex;gap:22px;transform:translateX(-40%);width:max-content}
+.word-set{display:flex;gap:22px;flex:none}
+.conveyor-page .trace-chip{display:flex!important;opacity:1!important;visibility:visible!important;min-width:132px;justify-content:center;align-items:center;white-space:nowrap}
+.walker{position:absolute;z-index:30;left:8%;bottom:8%;width:118px;height:115px;cursor:grab;touch-action:none;user-select:none;transform:translateX(0)}
+.walker:after{content:"";position:absolute;left:8px;right:2px;bottom:3px;height:2px;background:linear-gradient(90deg,transparent,rgba(255,207,34,.42),transparent);filter:blur(.4px)}
+.leg{position:absolute;left:46px;top:5px;width:18px;height:75px;border-radius:12px;background:linear-gradient(90deg,#151b18,#303b34 48%,#101512);transform-origin:50% 5%;box-shadow:inset 3px 0 rgba(255,255,255,.05)}
+.leg-front{transform:rotate(-17deg);animation:legFront 1s ease-in-out infinite paused}.leg-back{transform:rotate(18deg);animation:legBack 1s ease-in-out infinite paused}
+.walker.walking .leg-front,.walker.walking .leg-back{animation-play-state:running}
+.shoe{position:absolute;left:-4px;bottom:-5px;width:46px;height:19px;border-radius:12px 22px 7px 7px;background:#050706;border:1px solid rgba(255,255,255,.22);box-shadow:0 4px 10px rgba(0,0,0,.4)}
+.leg-front .shoe{transform:rotate(5deg)}.leg-back .shoe{transform:rotate(-4deg)}
+.crumb-layer{position:absolute;inset:0;z-index:20;pointer-events:none;overflow:hidden}
+.crumb-burst{position:absolute;width:1px;height:1px}
+.crumb-burst i{position:absolute;font:700 9px/1 "Courier New",monospace;font-style:normal;color:#57ff8c;text-shadow:0 0 7px rgba(51,255,120,.7);opacity:0;animation:crumbFall .62s ease-out var(--cd) forwards}
+.crumb-burst i:nth-child(3n){color:#ffdc45}.crumb-burst i:nth-child(4n){color:#62aaff}
+.conveyor-page .trace-chip.crumbing{animation:crumbWord .5s ease!important}
+.conveyor-page .belt-hint{bottom:-35px}
+@keyframes legFront{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(22deg)}}@keyframes legBack{0%,100%{transform:rotate(22deg)}50%{transform:rotate(-20deg)}}
+@keyframes crumbFall{0%{opacity:0;transform:translate(0,0) scale(1)}18%{opacity:1}100%{opacity:0;transform:translate(var(--cx),var(--cy)) scale(.35);filter:blur(1px)}}
+@keyframes crumbWord{0%{opacity:1;filter:none}45%{opacity:.35;filter:blur(2px);letter-spacing:.13em}100%{opacity:1;filter:none}}
+@media(max-width:700px){
+ .conveyor-page .conveyor-track{top:43%;gap:12px}.word-set{gap:12px}
+ .conveyor-page .trace-chip{min-width:96px!important;padding:11px 10px!important;font-size:2.65vw!important}
+ .walker{left:5%;bottom:8%;width:90px;height:94px}.leg{left:34px;height:61px;width:15px}.shoe{width:37px;height:16px}
+}
