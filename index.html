@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-road06">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-spill06">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -188,7 +188,35 @@ function startSurveillanceLoop(){
   clearInterval(surveillanceTimer);
   surveillanceIndex=0;
   el.textContent=surveillanceWords[0];
-  surveillanceTimer=setInterval(()=>{
+  surveillanceTimer=function dissolveTrace(chip){
+ if(chip.classList.contains('dissolving')) return;
+ const road=document.getElementById('perspectiveRoad');
+ if(!road)return;
+ const rr=road.getBoundingClientRect(), cr=chip.getBoundingClientRect();
+ const layer=document.createElement('div');
+ layer.className='digital-spill';
+ layer.style.left=(cr.left-rr.left+cr.width/2)+'px';
+ layer.style.top=(cr.top-rr.top+cr.height/2)+'px';
+ const chars='010101001101HASHDATA{}[]<>/\\';
+ for(let i=0;i<34;i++){
+   const bit=document.createElement('i');
+   bit.textContent=chars[Math.floor(Math.random()*chars.length)];
+   bit.style.setProperty('--x',((Math.random()-.5)*150)+'px');
+   bit.style.setProperty('--y',(35+Math.random()*155)+'px');
+   bit.style.setProperty('--r',((Math.random()-.5)*90)+'deg');
+   bit.style.setProperty('--d',(Math.random()*180)+'ms');
+   layer.appendChild(bit);
+ }
+ road.appendChild(layer);
+ chip.classList.add('dissolving');
+ setTimeout(()=>{
+   layer.remove();
+   chip.classList.remove('dissolving');
+   chip.dataset.manual='';
+ },1250);
+}
+
+setInterval(()=>{
     el.classList.add('swap');
     setTimeout(()=>{
       surveillanceIndex=(surveillanceIndex+1)%surveillanceWords.length;
