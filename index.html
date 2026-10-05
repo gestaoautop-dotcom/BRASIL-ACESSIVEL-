@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-beltlight">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-walk06">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -75,17 +75,34 @@
    <div class="conveyor-wrap">
      <div class="conveyor" id="perspectiveRoad">
        <div class="conveyor-data"></div>
+       <div class="crumb-layer" id="crumbLayer"></div>
        <div class="conveyor-track" id="conveyorTrack">
-         <button class="trace-chip" data-trace>DADOS</button>
-         <button class="trace-chip" data-trace>DINHEIRO</button>
-         <button class="trace-chip" data-trace>VOTAÇÃO</button>
-         <button class="trace-chip" data-trace>CONTRATO</button>
-         <button class="trace-chip" data-trace>DECISÃO</button>
-         <button class="trace-chip" data-trace>PROMESSA</button>
-         <button class="trace-chip" data-trace>REGISTRO</button>
+         <div class="word-set">
+           <span class="trace-chip" data-trace>DADOS</span>
+           <span class="trace-chip" data-trace>DINHEIRO</span>
+           <span class="trace-chip" data-trace>VOTAÇÃO</span>
+           <span class="trace-chip" data-trace>CONTRATO</span>
+           <span class="trace-chip" data-trace>DECISÃO</span>
+           <span class="trace-chip" data-trace>PROMESSA</span>
+           <span class="trace-chip" data-trace>REGISTRO</span>
+         </div>
+         <div class="word-set" aria-hidden="true">
+           <span class="trace-chip" data-trace>DADOS</span>
+           <span class="trace-chip" data-trace>DINHEIRO</span>
+           <span class="trace-chip" data-trace>VOTAÇÃO</span>
+           <span class="trace-chip" data-trace>CONTRATO</span>
+           <span class="trace-chip" data-trace>DECISÃO</span>
+           <span class="trace-chip" data-trace>PROMESSA</span>
+           <span class="trace-chip" data-trace>REGISTRO</span>
+         </div>
+       </div>
+
+       <div class="walker" id="walker" aria-label="Arraste os passos para caminhar">
+         <div class="leg leg-back"><span class="shoe"></span></div>
+         <div class="leg leg-front"><span class="shoe"></span></div>
        </div>
      </div>
-     <div class="belt-hint"><span>↔</span> ARRASTE A ESTEIRA</div>
+     <div class="belt-hint"><span>→</span> ARRASTE OS PASSOS PARA A DIREITA</div>
    </div>
 
    <div class="trace-ending">Tudo passa.<br><strong>O RASTRO FICA.</strong></div>
@@ -137,51 +154,60 @@ if(moodToggle&&page4){let bad=false;moodToggle.addEventListener('click',e=>{e.st
 
 const floatStage=document.getElementById('floatStage');
 function launchFloatCards(){document.querySelectorAll('[data-float]').forEach((c,i)=>{c.classList.remove('arrived');c.classList.add('incoming');c.style.setProperty('--enter-delay',(i*85)+'ms')});requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('[data-float]').forEach(c=>c.classList.add('arrived'))));setTimeout(()=>document.querySelectorAll('[data-float]').forEach(c=>c.classList.remove('incoming','arrived')),1500)}
-document.querySelectorAll('[data-float]').forEach(card=>{let drag=false,dx=0,dy=0;card.addEventListener('pointerdown',e=>{drag=true;const r=card.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;card.setPointerCapture?.(e.pointerId);card.classList.add('dragging');e.stopPropagation()});card.addEventListener('pointermove',e=>{if(!drag||!floatStage)return;const s=floatStage.getBoundingClientRect(),r=card.getBoundingClientRect();let x=Math.max(0,Math.min(s.width-r.width,e.clientX-s.left-dx)),y=Math.max(0,Math.min(s.height-r.height,e.clientY-s.top-dy));card.style.left=x+'px';card.style.top=y+'px';card.style.right='auto';card.style.bottom='auto';card.style.transform='none';e.stopPropagation()});card.addEventListener('pointerup',e=>{drag=false;card.classList.remove('dragging');e.stopPropagation()});});
+document.querySelectorAll('[data-float]').forEach(card=>{let drag=false,dx=0,dy=0;card.addEventListener('pointerdown',e=>{drag=true;const r=card.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;card.setPointerCapture?.(e.pointerId);card.classList.add('dragging');e.stopPropagation()});card.addEventListener('pointermove',e=>{if(!drag||!floatStage)return;const s=floatStage.getBoundingClientRect(),r=card.getBoundingClientRect();let x=Math.max(0,Math.min(s.width-r.width,e.clientX-s.left-dx)),y=Math.max(0,Math.min(s.height-r.height,e.clientY-s.top-dy));card.style.left=x+'px';card.style.top=y+'px';card.style.right='auto';card.style.bottom='auto';card.style.transform='none';e.stopPropagation()});card.addEventListener('pointerup',e=>{drag=false;card.classList.remove('dragging');e.stopPropagation()})});
 
-const road=document.getElementById('perspectiveRoad'),track=document.getElementById('conveyorTrack');let bd=false,last=0,off=0;
-function spill(chip){
- if(!road||chip.dataset.spilling==='1')return;
- chip.dataset.spilling='1';
- const rr=road.getBoundingClientRect(),cr=chip.getBoundingClientRect(),layer=document.createElement('div');
- layer.className='digital-spill';
+/* Página 06 — passos + palavras em loop */
+const road=document.getElementById('perspectiveRoad');
+const track=document.getElementById('conveyorTrack');
+const walker=document.getElementById('walker');
+const crumbLayer=document.getElementById('crumbLayer');
+let walking=false,lastX=0,walkerX=0,trackX=0,lastCrumbAt=0;
+
+function makeCrumbs(chip){
+ if(!crumbLayer||!road)return;
+ const rr=road.getBoundingClientRect(),cr=chip.getBoundingClientRect();
+ const layer=document.createElement('div');layer.className='crumb-burst';
  layer.style.left=(cr.left-rr.left+cr.width/2)+'px';
  layer.style.top=(cr.top-rr.top+cr.height/2)+'px';
- const chars='01HASHDATA{}[]<>';
- for(let i=0;i<8;i++){
-  const bit=document.createElement('i');
-  bit.textContent=chars[Math.floor(Math.random()*chars.length)];
-  bit.style.setProperty('--x',((Math.random()-.5)*70)+'px');
-  bit.style.setProperty('--y',(18+Math.random()*70)+'px');
-  bit.style.setProperty('--r',((Math.random()-.5)*60)+'deg');
-  bit.style.setProperty('--d',(Math.random()*80)+'ms');
-  layer.appendChild(bit);
- }
- road.appendChild(layer);
- chip.classList.add('belt-dissolve');
- setTimeout(()=>{layer.remove();chip.classList.remove('belt-dissolve');chip.dataset.spilling='';},650);
+ const chars='01DATAHASH{}[]';
+ for(let i=0;i<6;i++){const b=document.createElement('i');b.textContent=chars[Math.floor(Math.random()*chars.length)];b.style.setProperty('--cx',(-20-Math.random()*70)+'px');b.style.setProperty('--cy',((Math.random()-.5)*42)+'px');b.style.setProperty('--cd',(Math.random()*80)+'ms');layer.appendChild(b)}
+ crumbLayer.appendChild(layer);setTimeout(()=>layer.remove(),700);
+ chip.classList.remove('crumbing');void chip.offsetWidth;chip.classList.add('crumbing');setTimeout(()=>chip.classList.remove('crumbing'),520);
 }
 
-function moveBelt(d){
- if(!track||!road)return;
- off+=d;
- track.style.transform='translateX('+off+'px)';
- const rr=road.getBoundingClientRect();
- const movingRight=d>0;
- document.querySelectorAll('#page-6 [data-trace]').forEach(chip=>{
-   const cr=chip.getBoundingClientRect();
-   const behind=movingRight ? cr.right<rr.left+rr.width*.18 : cr.left>rr.right-rr.width*.18;
-   if(behind) spill(chip);
- });
- if(off>220)off=220;
- if(off<-220)off=-220;
- track.style.transform='translateX('+off+'px)';
+function normalizeTrack(){
+ if(!track)return;
+ const set=track.querySelector('.word-set');
+ if(!set)return;
+ const w=set.getBoundingClientRect().width+22;
+ if(trackX<=-w){trackX+=w}
+ if(trackX>=0){trackX-=w}
+ track.style.transform='translateX('+trackX+'px)';
 }
-road?.addEventListener('pointerdown',e=>{bd=true;last=e.clientX;road.setPointerCapture?.(e.pointerId);road.classList.add('is-dragging');e.stopPropagation()});
-road?.addEventListener('pointermove',e=>{if(!bd)return;const d=e.clientX-last;last=e.clientX;if(Math.abs(d)>0.8)moveBelt(d);e.stopPropagation()});
-road?.addEventListener('pointerup',e=>{bd=false;road.classList.remove('is-dragging');e.stopPropagation()});
-road?.addEventListener('pointercancel',()=>{bd=false;road.classList.remove('is-dragging')});
-road?.addEventListener('wheel',e=>{e.preventDefault();e.stopPropagation();moveBelt((e.deltaX||e.deltaY)*-.12)},{passive:false});
+
+function walkRight(delta){
+ if(!road||!track||!walker||delta<=0)return;
+ const rr=road.getBoundingClientRect(),wr=walker.getBoundingClientRect();
+ walkerX=Math.min(rr.width-wr.width-16,walkerX+delta*.52);
+ walker.style.transform='translateX('+walkerX+'px)';
+ walker.classList.add('walking');
+
+ trackX-=delta*.72;
+ normalizeTrack();
+
+ const now=performance.now();
+ if(now-lastCrumbAt>95){
+   const wx=walker.getBoundingClientRect().left;
+   const candidates=[...road.querySelectorAll('[data-trace]')].filter(ch=>{const r=ch.getBoundingClientRect();return r.right<wx-6 && r.right>wx-190});
+   if(candidates.length)makeCrumbs(candidates[candidates.length-1]);
+   lastCrumbAt=now;
+ }
+}
+
+walker?.addEventListener('pointerdown',e=>{walking=true;lastX=e.clientX;walker.setPointerCapture?.(e.pointerId);walker.classList.add('walking');e.stopPropagation()});
+walker?.addEventListener('pointermove',e=>{if(!walking)return;const d=e.clientX-lastX;lastX=e.clientX;if(d>0.5)walkRight(d);e.stopPropagation()});
+walker?.addEventListener('pointerup',e=>{walking=false;walker.classList.remove('walking');e.stopPropagation()});
+walker?.addEventListener('pointercancel',()=>{walking=false;walker.classList.remove('walking')});
 </script></body></html/* Página 06 — esteira de rastros */
 const traceRoad=document.getElementById('perspectiveRoad');
 const conveyorTrack=document.getElementById('conveyorTrack');
