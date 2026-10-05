@@ -116,3 +116,10 @@
 .fc1{left:4%;top:13%;transform:rotate(-7deg)}.fc2{right:5%;top:11%;transform:rotate(8deg);animation-delay:-1s}.fc3{left:1%;top:48%;transform:rotate(5deg);animation-delay:-2.1s}.fc4{right:1%;top:46%;transform:rotate(-6deg);animation-delay:-.6s}.fc5{left:12%;bottom:8%;transform:rotate(-3deg);animation-delay:-3s}.fc6{right:12%;bottom:7%;transform:rotate(5deg);animation-delay:-1.8s}.fc7{left:30%;top:5%;transform:rotate(3deg);animation-delay:-2.5s}.fc8{right:29%;bottom:3%;transform:rotate(-4deg);animation-delay:-.9s}
 @keyframes cardFloat{50%{margin-top:-12px;filter:brightness(1.15)}}@keyframes ambientFloat{to{transform:translate(3%,2%) scale(1.06)}}
 @media(max-width:700px){.float-stage{width:92vw;height:82svh}.float-copy{width:82vw}.float-copy h2{font-size:14vw}.float-copy p{font-size:4.5vw}.float-card{min-width:118px;height:60px;padding:0 14px;border-radius:17px;font-size:3.3vw}.fc1{left:0;top:12%}.fc2{right:0;top:18%}.fc3{left:0;top:37%}.fc4{right:0;top:43%}.fc5{left:2%;bottom:15%}.fc6{right:1%;bottom:10%}.fc7{left:29%;top:5%}.fc8{right:25%;bottom:2%}}
+
+/* PAGE 04 -> 05: placas atravessam a transicao */
+.float-card.incoming{opacity:0!important;filter:blur(10px) brightness(1.45)!important;animation:none!important;transition:none!important}
+.float-card.incoming:nth-of-type(1),.float-card.incoming:nth-of-type(3),.float-card.incoming:nth-of-type(5),.float-card.incoming:nth-of-type(7){translate:-72vw 8vh;rotate:-18deg;scale:.72}
+.float-card.incoming:nth-of-type(2),.float-card.incoming:nth-of-type(4),.float-card.incoming:nth-of-type(6),.float-card.incoming:nth-of-type(8){translate:-92vw -7vh;rotate:16deg;scale:.68}
+.float-card.incoming.arrived{opacity:1!important;filter:blur(0) brightness(1)!important;translate:0 0;rotate:0deg;scale:1;transition:translate .9s cubic-bezier(.16,.82,.24,1),rotate .9s cubic-bezier(.16,.82,.24,1),scale .9s cubic-bezier(.16,.82,.24,1),opacity .45s ease,filter .7s ease!important;transition-delay:var(--enter-delay)!important}
+@media(max-width:700px){.float-card.incoming:nth-of-type(n){translate:-120vw 0;scale:.62}.float-card.incoming.arrived{translate:0 0;scale:1}}
