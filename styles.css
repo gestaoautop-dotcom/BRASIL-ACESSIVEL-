@@ -43,3 +43,34 @@
 #page-4 .discussion{font-size:clamp(28px,3.2vw,48px);line-height:1.12;margin:28px auto 18px;max-width:900px}
 #page-4 .aside{font-size:clamp(22px,2.5vw,36px);line-height:1.2;margin:0 auto;max-width:900px}
 @media(max-width:700px){#page-4 .discussion{font-size:7vw}#page-4 .aside{font-size:5.5vw}#page-4.mood-bad-state .glass-core i{left:36px}}
+
+/* PAGE 05 — roleta vertical de dados */
+.roulette-page{background:radial-gradient(circle at 75% 50%,rgba(255,218,54,.11),transparent 30%),#f7f7f3}
+.roulette-layout{width:min(1180px,92vw);display:grid;grid-template-columns:minmax(320px,.9fr) minmax(420px,1.1fr);gap:7vw;align-items:center}
+.roulette-side{position:relative}
+.roulette-side>small{display:block;letter-spacing:.22em;color:#8a8a8a;margin:0 0 18px 8px}
+.roulette-window{height:430px;position:relative;overflow:hidden;padding:135px 12px}
+.roulette-window:before,.roulette-window:after{content:"";position:absolute;left:0;right:0;height:120px;z-index:4;pointer-events:none}
+.roulette-window:before{top:0;background:linear-gradient(#f7f7f3 15%,rgba(247,247,243,.94) 42%,rgba(247,247,243,0))}
+.roulette-window:after{bottom:0;background:linear-gradient(rgba(247,247,243,0),rgba(247,247,243,.94) 58%,#f7f7f3 85%)}
+.roulette-track{display:flex;flex-direction:column;gap:14px;transition:transform .65s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.roulette-item{height:64px;border:1px solid rgba(0,0,0,.16);border-radius:14px;background:rgba(255,255,255,.26);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-weight:800;font-size:clamp(18px,2vw,28px);letter-spacing:.04em;color:#111;opacity:.48;filter:blur(1.2px);transform:scale(.94);transition:.5s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+.roulette-item.is-active{opacity:1;filter:blur(0);transform:scale(1.04);background:rgba(255,255,255,.66);border-color:rgba(0,0,0,.32);box-shadow:0 14px 40px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.85)}
+.roulette-item.is-near{opacity:.72;filter:blur(.45px);transform:scale(.98)}
+.roulette-focus{position:absolute;left:0;right:0;top:50%;height:76px;transform:translateY(-50%);border-top:1px solid rgba(0,0,0,.08);border-bottom:1px solid rgba(0,0,0,.08);pointer-events:none;z-index:3}
+.roulette-controls{display:flex;gap:10px;padding-left:10px}
+.roulette-controls button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(0,0,0,.14);background:rgba(255,255,255,.45);backdrop-filter:blur(10px);font-size:20px;cursor:pointer}
+.roulette-copy{text-align:left}
+.roulette-copy .mini-label{font-size:14px;letter-spacing:.16em;font-weight:800;margin-bottom:12px}
+.roulette-copy h2{font-size:clamp(58px,7vw,112px);line-height:.88;margin:0 0 28px}
+.roulette-copy p{font-size:clamp(20px,2vw,30px);max-width:620px;line-height:1.25;color:#555}
+@media(max-width:800px){
+ .roulette-layout{grid-template-columns:1fr;gap:18px;width:90vw}
+ .roulette-copy{order:-1;text-align:center}
+ .roulette-copy h2{font-size:13vw;margin-bottom:16px}
+ .roulette-copy p{font-size:5vw;margin:0 auto}
+ .roulette-window{height:330px;padding:98px 10px}
+ .roulette-item{height:56px;font-size:5.2vw}
+ .roulette-window:before,.roulette-window:after{height:88px}
+ .roulette-controls{justify-content:center;padding-left:0}
+}
