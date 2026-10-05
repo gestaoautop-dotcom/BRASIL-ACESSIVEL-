@@ -223,3 +223,37 @@
 .digital-spill i:nth-child(5n){color:#5aaaff;text-shadow:0 0 8px rgba(60,135,220,.75)}
 @keyframes dissolveWord{0%{opacity:1;filter:blur(0);scale:1}35%{opacity:.82;filter:blur(1px);scale:1.03}72%{opacity:.16;filter:blur(6px);scale:.92}100%{opacity:0;filter:blur(12px);scale:.72}}
 @keyframes spillBit{0%{opacity:0;transform:translate(0,-8px) rotate(0) scale(.55)}15%{opacity:1}70%{opacity:.82;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1)}100%{opacity:0;transform:translate(calc(var(--x) * 1.2),calc(var(--y) * 1.35)) rotate(var(--r)) scale(.45);filter:blur(2px)}}
+
+/* PAGE 06C — esteira reta de dados */
+.conveyor-page{background:#010704!important}
+.conveyor-page .trace-road-stage{height:100svh}
+.conveyor-page .trace-road-copy{top:8%;width:min(1000px,92vw)}
+.conveyor-page .trace-road-copy h2{font-size:clamp(64px,8.4vw,130px);line-height:.86;margin-bottom:22px}
+.conveyor-page .impact-line{font-size:clamp(24px,3vw,44px);line-height:1.05!important;color:rgba(255,255,255,.72)!important}
+.conveyor-page .impact-line strong{color:#fff;font-weight:800}
+.conveyor-wrap{position:absolute;left:50%;top:45%;transform:translateX(-50%);width:min(1200px,100vw);height:31%;z-index:10}
+.conveyor{position:absolute;inset:0;overflow:hidden;cursor:grab;touch-action:none;user-select:none;perspective:none;border-top:1px solid rgba(74,255,132,.18);border-bottom:1px solid rgba(74,255,132,.18);background:linear-gradient(180deg,rgba(21,148,71,.04),rgba(255,255,255,.025),rgba(6,59,120,.05));box-shadow:0 0 60px rgba(21,148,71,.08)}
+.conveyor.is-dragging{cursor:grabbing}
+.conveyor-data{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(47,255,119,.12) 0 1px,transparent 1px 62px),repeating-linear-gradient(0deg,transparent 0 31px,rgba(47,255,119,.06) 32px 33px);animation:beltGrid 3s linear infinite}
+.conveyor-data:after{content:"010010  DATA  110101  HASH  001101  LOG  01001  TRACE  11010  VERIFIED  00101";position:absolute;left:0;right:0;bottom:12%;font:700 10px/1 "Courier New",monospace;letter-spacing:.32em;color:rgba(74,255,132,.24);white-space:nowrap}
+.conveyor-track{position:absolute;left:-14%;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:28px;width:max-content;will-change:transform}
+.conveyor-page .trace-chip{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;flex:0 0 auto;min-width:150px;padding:17px 22px;border-radius:18px;background:rgba(7,30,18,.64);border:1px solid rgba(83,255,139,.34);box-shadow:inset 0 1px rgba(255,255,255,.2),0 0 25px rgba(21,148,71,.14);animation:none!important;transition:none;color:#fff}
+.conveyor-page .trace-chip:nth-child(3n+2){border-color:rgba(255,207,34,.35);background:rgba(55,48,4,.38)}
+.conveyor-page .trace-chip:nth-child(3n){border-color:rgba(74,143,220,.4);background:rgba(5,31,61,.48)}
+.conveyor-page .trace-chip.belt-dissolve{animation:beltWordGlitch .7s ease forwards!important}
+.belt-hint{position:absolute;left:50%;bottom:-38px;transform:translateX(-50%);font-size:11px;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.52);white-space:nowrap}
+.belt-hint span{display:inline-block;margin-right:8px;color:#ffcf22;font-size:18px;animation:beltHint 1.3s ease-in-out infinite}
+.conveyor-page .trace-ending{bottom:4%;font-size:clamp(25px,3.1vw,46px);line-height:1.02;text-align:center;color:rgba(255,255,255,.68)}
+.conveyor-page .trace-ending strong{display:inline-block;margin-top:5px;font-size:1.18em;letter-spacing:.04em;color:#fff}
+@keyframes beltGrid{to{background-position:62px 0,0 0}}
+@keyframes beltHint{50%{transform:translateX(8px)}}
+@keyframes beltWordGlitch{0%{opacity:1;filter:blur(0)}35%{opacity:.65;filter:blur(1px);letter-spacing:.18em}70%{opacity:.2;filter:blur(5px);transform:translateY(7px)}100%{opacity:1;filter:blur(0);transform:none}}
+@media(max-width:700px){
+ .conveyor-page .trace-road-copy{top:8%;width:92vw}
+ .conveyor-page .trace-road-copy h2{font-size:13.8vw;margin-bottom:16px}
+ .conveyor-page .impact-line{font-size:6vw!important;line-height:1.08!important}
+ .conveyor-wrap{top:43%;height:30%}
+ .conveyor-track{left:-35%;gap:16px}
+ .conveyor-page .trace-chip{min-width:118px;padding:14px 15px;font-size:3vw!important}
+ .conveyor-page .trace-ending{bottom:5%;font-size:6vw}
+}
