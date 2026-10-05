@@ -378,3 +378,20 @@
  .reveal-actions{font-size:3.3vw;white-space:normal;width:92vw;line-height:1.8;transform:translateY(27vh)}
  .reveal-party{font-size:4.4vw;transform:translateY(27vh)}
 }
+
+/* page07 lens zoom */
+.people-lens-page{background:#f8f8f5!important}
+.people-scene{position:absolute;z-index:4;left:50%;top:50%;width:min(1120px,92vw);transform:translate(-50%,-48%);text-align:center;transform-origin:50% 50%}
+.people-scene .people-word{font-family:Georgia,serif;font-size:clamp(82px,13vw,205px);line-height:.78;letter-spacing:-.07em;margin:0 0 22px}
+.people-scene .people-in{font-size:clamp(19px,2vw,30px)!important;margin:0 0 28px!important}
+.people-scene h2{font-size:clamp(48px,7.2vw,110px);line-height:.83;margin:0 0 26px}
+.people-scene .who{font-size:clamp(18px,2.1vw,31px);font-weight:700;margin:0 0 42px}
+.people-actions{font-size:clamp(16px,1.8vw,27px);font-weight:750;line-height:1.8}
+.people-party{font-family:Georgia,serif;font-size:clamp(18px,2vw,29px);margin-top:8px}
+.people-scene-blur{filter:blur(5px);opacity:.42}
+.people-scene-sharp{z-index:8;pointer-events:none;clip-path:circle(var(--lr,170px) at var(--lx,50%) var(--ly,50%));transform:translate(-50%,-48%) scale(var(--zoom,1.13))}
+.giant-lens{z-index:12;background:transparent!important}
+.lens-glass{background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.20),rgba(255,255,255,.035) 50%,rgba(80,160,130,.025) 72%,rgba(255,255,255,.10))!important;border-color:rgba(35,45,40,.38)!important;box-shadow:inset 0 0 0 3px rgba(255,255,255,.7),inset 0 0 35px rgba(255,255,255,.22),0 22px 48px rgba(0,0,0,.12)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.giant-lens.lens-drop{animation:lensDropIn 1.05s cubic-bezier(.18,.85,.24,1.08) both}
+@keyframes lensDropIn{0%{opacity:0;transform:translate(-50%,-155%) rotate(-28deg) scale(.72)}65%{opacity:1;transform:translate(-50%,-43%) rotate(-8deg) scale(1.04)}82%{transform:translate(-50%,-53%) rotate(-13deg) scale(.98)}100%{transform:translate(-50%,-50%) rotate(-12deg) scale(1)}}
+@media(max-width:700px){.people-scene{width:94vw;transform:translate(-50%,-47%)}.people-scene-sharp{transform:translate(-50%,-47%) scale(var(--zoom,1.13))}.people-scene .people-word{font-size:19vw}.people-scene h2{font-size:11.4vw}.people-scene .who{font-size:4.2vw;margin-bottom:30px}.people-actions{font-size:3.55vw;line-height:1.9}.people-party{font-size:4.5vw}.people-scene-blur{filter:blur(4px);opacity:.38}}
