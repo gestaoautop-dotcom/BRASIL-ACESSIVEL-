@@ -29,7 +29,9 @@ function surveillanceLoop(){const el=document.getElementById("surveillanceWord")
 const moodToggle=document.getElementById('moodToggle'),page4=document.getElementById('page-4');
 if(moodToggle&&page4){
  let good=false;
- const setMood=()=>{good=!good;page4.classList.toggle('mood-good',good)};
- moodToggle.addEventListener('click',setMood);
- setInterval(setMood,2600);
+ page4.classList.remove('mood-good');
+ moodToggle.addEventListener('click',()=>{
+   good=!good;
+   page4.classList.toggle('mood-good',good);
+ });
 }
