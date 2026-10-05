@@ -284,3 +284,24 @@
  .conveyor-page .trace-chip{min-width:96px!important;padding:11px 10px!important;font-size:2.65vw!important}
  .walker{left:5%;bottom:8%;width:90px;height:94px}.leg{left:34px;height:61px;width:15px}.shoe{width:37px;height:16px}
 }
+
+/* PAGE 06E — pernas de vidro sobre as palavras + loop lateral */
+.conveyor-page .conveyor-track{z-index:12}
+.walker{z-index:35;bottom:20%;mix-blend-mode:screen}
+.leg{
+ background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(113,255,165,.14) 42%,rgba(255,255,255,.06) 58%,rgba(72,142,220,.13));
+ border:1px solid rgba(255,255,255,.32);
+ box-shadow:inset 2px 0 rgba(255,255,255,.16),inset -2px 0 rgba(21,148,71,.12),0 0 18px rgba(64,255,131,.09);
+ backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
+.shoe{
+ background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(21,148,71,.13) 45%,rgba(6,59,120,.14));
+ border:1px solid rgba(255,255,255,.4);
+ box-shadow:inset 0 1px rgba(255,255,255,.28),0 0 17px rgba(255,207,34,.1);
+ backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
+.walker:after{background:linear-gradient(90deg,transparent,rgba(87,255,141,.42),rgba(255,207,34,.25),transparent)}
+.walker.reentering{transition:none!important}
+.conveyor-page .trace-chip{z-index:11}
+.conveyor-page .belt-hint{color:rgba(255,255,255,.58)}
+@media(max-width:700px){.walker{bottom:19%}}
