@@ -351,3 +351,30 @@
  .shoe{width:190%!important;height:17%!important}
  .road-arrows{bottom:3%;font-size:20px;gap:9px}
 }
+
+/* PAGE 07 — lupa gigante transparente */
+.people-lens-page{background:#f8f8f5;color:#101010}
+.people-stage{position:relative;width:100vw;height:100svh;overflow:hidden;display:grid;place-items:center}
+.people-stage>small{position:absolute;top:5%;left:50%;transform:translateX(-50%);letter-spacing:.2em;color:#999}
+.people-copy{position:relative;z-index:4;text-align:center;width:min(1100px,92vw)}
+.people-lens-page .people-word{font-family:Georgia,'Times New Roman',serif;font-size:clamp(82px,13vw,205px);line-height:.78;letter-spacing:-.07em;margin:0 0 22px}
+.people-in{font-size:clamp(19px,2vw,30px)!important;margin:0 0 28px!important}
+.people-lens-page h2{font-size:clamp(48px,7.2vw,110px);line-height:.83;margin:0 0 26px}
+.people-lens-page .who{font-size:clamp(18px,2.1vw,31px);font-weight:700;margin:0}
+.lens-reveal{position:absolute;z-index:8;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;text-align:center;background:rgba(4,14,9,.94);color:#fff;clip-path:circle(var(--lr,180px) at var(--lx,50%) var(--ly,50%))}
+.reveal-actions{font-size:clamp(16px,2vw,29px);font-weight:800;white-space:nowrap;transform:translateY(25vh)}
+.reveal-party{font-family:Georgia,'Times New Roman',serif;font-size:clamp(18px,2vw,30px);transform:translateY(25vh)}
+.giant-lens{position:absolute;z-index:12;left:50%;top:50%;width:clamp(310px,43vw,650px);height:clamp(430px,62vw,820px);transform:translate(-50%,-50%) rotate(-12deg);cursor:grab;touch-action:none;user-select:none}
+.giant-lens.dragging{cursor:grabbing}
+.lens-glass{position:absolute;left:3%;top:1%;width:74%;aspect-ratio:1;border-radius:50%;border:clamp(8px,1vw,15px) solid rgba(255,255,255,.44);background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.35),rgba(21,148,71,.06) 38%,rgba(6,59,120,.08) 70%,rgba(255,255,255,.12));box-shadow:inset 0 0 0 2px rgba(0,0,0,.18),inset 0 0 70px rgba(255,255,255,.22),0 24px 65px rgba(0,0,0,.18);backdrop-filter:blur(1.5px) saturate(1.2);-webkit-backdrop-filter:blur(1.5px) saturate(1.2)}
+.lens-glass:after{content:"";position:absolute;left:16%;top:12%;width:35%;height:13%;border-radius:50%;background:rgba(255,255,255,.28);filter:blur(8px);transform:rotate(-25deg)}
+.lens-handle{position:absolute;left:61%;top:55%;width:15%;height:43%;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.16),rgba(12,28,20,.55),rgba(255,255,255,.16));border:2px solid rgba(255,255,255,.35);box-shadow:inset 2px 0 rgba(255,255,255,.24),0 18px 30px rgba(0,0,0,.2);transform:rotate(-37deg);transform-origin:top}
+@media(max-width:700px){
+ .people-lens-page .people-word{font-size:20vw;margin-bottom:16px}
+ .people-in{font-size:4.7vw!important;margin-bottom:22px!important}
+ .people-lens-page h2{font-size:12.2vw;margin-bottom:22px}
+ .people-lens-page .who{font-size:4.3vw}
+ .giant-lens{width:76vw;height:105vw}
+ .reveal-actions{font-size:3.3vw;white-space:normal;width:92vw;line-height:1.8;transform:translateY(27vh)}
+ .reveal-party{font-size:4.4vw;transform:translateY(27vh)}
+}
