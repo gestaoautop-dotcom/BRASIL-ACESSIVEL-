@@ -27,3 +27,19 @@
 @keyframes glassSweep{to{transform:translateX(70%)}}
 @keyframes lightFloat{50%{transform:translate(22px,-13px) scale(1.14);opacity:.75}}
 @media(max-width:700px){#page-4 h2{font-size:13vw}.mood-stage{height:130px}.glass-toggle{gap:12px;padding:12px 16px}.glass-core{width:70px;height:38px}.glass-core i{width:28px;height:28px}.mood-label{font-size:14px}#page-4.mood-good .glass-core i{left:36px}.light-a{left:4%}.light-b{right:4%}}
+
+/* PAGE 04 — default aceso; somente RUIM apaga */
+#page-4{background:#f6f8f5;color:#111}
+#page-4 .glass-toggle{color:#111;border-color:rgba(0,0,0,.15);background:rgba(255,255,255,.32)}
+#page-4 .glass-core{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.38)}
+#page-4 .glass-core i{left:5px;background:#fff;box-shadow:0 0 28px rgba(255,231,80,.95)}
+#page-4 .mood-good{opacity:1}#page-4 .mood-bad{opacity:.35}
+#page-4.mood-bad-state{background:#090a0d;color:#fff}
+#page-4.mood-bad-state .glass-toggle{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.09)}
+#page-4.mood-bad-state .glass-core{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.12)}
+#page-4.mood-bad-state .glass-core i{left:44px;background:rgba(255,255,255,.75);box-shadow:0 0 10px rgba(255,255,255,.15)}
+#page-4.mood-bad-state .mood-good{opacity:.35}#page-4.mood-bad-state .mood-bad{opacity:1}
+#page-4.mood-bad-state .light-reflection{opacity:.08}
+#page-4 .discussion{font-size:clamp(28px,3.2vw,48px);line-height:1.12;margin:28px auto 18px;max-width:900px}
+#page-4 .aside{font-size:clamp(22px,2.5vw,36px);line-height:1.2;margin:0 auto;max-width:900px}
+@media(max-width:700px){#page-4 .discussion{font-size:7vw}#page-4 .aside{font-size:5.5vw}#page-4.mood-bad-state .glass-core i{left:36px}}
