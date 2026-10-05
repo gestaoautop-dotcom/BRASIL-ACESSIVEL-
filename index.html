@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-0035">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-0415">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -30,8 +30,17 @@
 <section class="screen manifesto" id="page-4">
  <button class="back" data-prev="page-3">←</button>
  <div class="center"><small>04</small><h2>VOCÊ PODE ACHAR<br>BOM. PODE ACHAR RUIM.</h2>
- <div class="switch"><span>BOM</span><i></i><span>RUIM</span></div>
- <p>Mas talvez essa discussão já tenha ficado para trás.</p>
+ <div class="mood-stage" id="moodStage">
+   <button class="glass-toggle" id="moodToggle" type="button" aria-label="Alternar entre bom e ruim">
+     <span class="mood-label mood-good">BOM</span>
+     <span class="glass-core"><i></i></span>
+     <span class="mood-label mood-bad">RUIM</span>
+   </button>
+   <div class="light-reflection light-a"></div>
+   <div class="light-reflection light-b"></div>
+   <div class="light-reflection light-c"></div>
+ </div>
+ <p class="discussion">Mas talvez essa discussão já tenha ficado para trás.</p>
  <p class="aside">Até porque… <strong>você está lendo isso digitalmente.</strong> :)</p></div>
  <button class="next" data-next="page-5">→</button>
 </section>
@@ -67,4 +76,4 @@
  <button class="pill inverse">ENTENDER O BRASIL <b>→</b></button></div>
 </section>
 
-</main><script src="script.js?v=20261005-0035"></script></body></html>
+</main><script src="script.js?v=20261005-0415"></script></body></html>
