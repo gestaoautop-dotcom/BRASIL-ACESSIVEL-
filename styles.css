@@ -214,3 +214,12 @@
  .tw1{left:5%;top:76%}.tw2{left:24%;top:62%}.tw3{left:66%;top:70%}.tw4{left:37%;top:48%}.tw5{left:64%;top:38%}.tw6{left:29%;top:29%}.tw7{left:54%;top:18%}
  .trace-loop-hint{bottom:4%;font-size:8px}.trace-ending{bottom:2%;font-size:3.2vw}
 }
+
+/* PAGE 06 — palavra vira código e derrama sobre a estrada */
+.trace-chip.dissolving{animation:none!important;pointer-events:none;transform-origin:center;animation:dissolveWord 1.05s cubic-bezier(.3,0,.6,1) forwards!important}
+.digital-spill{position:absolute;z-index:18;width:1px;height:1px;pointer-events:none}
+.digital-spill i{position:absolute;left:0;top:0;font:700 11px/1 "Courier New",monospace;font-style:normal;color:#59ff8d;text-shadow:0 0 8px rgba(44,255,112,.85);opacity:0;animation:spillBit 1.05s cubic-bezier(.2,.55,.35,1) var(--d) forwards}
+.digital-spill i:nth-child(3n){color:#ffdc45;text-shadow:0 0 8px rgba(255,207,34,.7)}
+.digital-spill i:nth-child(5n){color:#5aaaff;text-shadow:0 0 8px rgba(60,135,220,.75)}
+@keyframes dissolveWord{0%{opacity:1;filter:blur(0);scale:1}35%{opacity:.82;filter:blur(1px);scale:1.03}72%{opacity:.16;filter:blur(6px);scale:.92}100%{opacity:0;filter:blur(12px);scale:.72}}
+@keyframes spillBit{0%{opacity:0;transform:translate(0,-8px) rotate(0) scale(.55)}15%{opacity:1}70%{opacity:.82;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1)}100%{opacity:0;transform:translate(calc(var(--x) * 1.2),calc(var(--y) * 1.35)) rotate(var(--r)) scale(.45);filter:blur(2px)}}
