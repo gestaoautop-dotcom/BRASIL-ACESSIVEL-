@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-giantwalk06">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-lens07">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -110,12 +110,28 @@
  <button class="next" data-next="page-7">→</button>
 </section>
 
-<section class="screen manifesto people" id="page-7">
+<section class="screen manifesto people people-lens-page" id="page-7">
  <button class="back" data-prev="page-6">←</button>
- <div class="center"><small>07</small><div class="people-word">O POVO</div>
- <p class="who">Cidadão? Político? Servidor? Empresário?<br><strong>Aqui todo mundo faz parte. :)</strong></p>
- <h2>SEM TORCIDA ORGANIZADA.</h2><div class="actions">👀 olhar&nbsp;&nbsp; 🔎 acompanhar&nbsp;&nbsp; 📊 comparar&nbsp;&nbsp; 🧾 conferir&nbsp;&nbsp; 🧠 entender</div>
- <p>Independente de partido.</p></div><button class="next" data-next="page-8">→</button>
+ <div class="people-stage" id="peopleStage">
+   <small>07</small>
+   <div class="people-copy">
+     <div class="people-word">O POVO</div>
+     <p class="people-in">Aqui todo mundo faz parte. :)</p>
+     <h2>SEM TORCIDA<br>ORGANIZADA.</h2>
+     <p class="who">Cidadão? Político? Servidor? Empresário?</p>
+   </div>
+
+   <div class="lens-reveal" id="lensReveal" aria-hidden="true">
+     <div class="reveal-actions">👀 olhar&nbsp;&nbsp; 🔎 acompanhar&nbsp;&nbsp; 📊 comparar&nbsp;&nbsp; 🧾 conferir&nbsp;&nbsp; 🧠 entender</div>
+     <div class="reveal-party">Independente de partido.</div>
+   </div>
+
+   <div class="giant-lens" id="giantLens" role="button" aria-label="Mova a lupa para investigar">
+     <div class="lens-glass"></div>
+     <div class="lens-handle"></div>
+   </div>
+ </div>
+ <button class="next" data-next="page-8">→</button>
 </section>
 
 <section class="screen manifesto final" id="page-8">
@@ -215,6 +231,25 @@ walker?.addEventListener('pointerdown',e=>{walking=true;lastX=e.clientX;walker.s
 walker?.addEventListener('pointermove',e=>{if(!walking)return;const d=e.clientX-lastX;lastX=e.clientX;if(Math.abs(d)>.5)walkRight(Math.abs(d));e.stopPropagation()});
 walker?.addEventListener('pointerup',e=>{walking=false;walker.classList.remove('walking');e.stopPropagation()});
 walker?.addEventListener('pointercancel',()=>{walking=false;walker.classList.remove('walking')});
+
+/* Página 07 — lupa móvel */
+const peopleStage=document.getElementById('peopleStage');
+const giantLens=document.getElementById('giantLens');
+const lensReveal=document.getElementById('lensReveal');
+let lensDrag=false,lensDX=0,lensDY=0;
+function updateLensReveal(){
+ if(!giantLens||!lensReveal||!peopleStage)return;
+ const sr=peopleStage.getBoundingClientRect(),lr=giantLens.getBoundingClientRect();
+ const cx=lr.left-sr.left+lr.width*.43,cy=lr.top-sr.top+lr.height*.43;
+ lensReveal.style.setProperty('--lx',cx+'px');
+ lensReveal.style.setProperty('--ly',cy+'px');
+ lensReveal.style.setProperty('--lr',(lr.width*.37)+'px');
+}
+giantLens?.addEventListener('pointerdown',e=>{lensDrag=true;const r=giantLens.getBoundingClientRect();lensDX=e.clientX-r.left;lensDY=e.clientY-r.top;giantLens.setPointerCapture?.(e.pointerId);giantLens.classList.add('dragging');e.stopPropagation()});
+giantLens?.addEventListener('pointermove',e=>{if(!lensDrag||!peopleStage)return;const s=peopleStage.getBoundingClientRect(),r=giantLens.getBoundingClientRect();let x=Math.max(-r.width*.25,Math.min(s.width-r.width*.75,e.clientX-s.left-lensDX)),y=Math.max(-r.height*.2,Math.min(s.height-r.height*.72,e.clientY-s.top-lensDY));giantLens.style.left=x+'px';giantLens.style.top=y+'px';giantLens.style.transform='none';updateLensReveal();e.stopPropagation()});
+giantLens?.addEventListener('pointerup',e=>{lensDrag=false;giantLens.classList.remove('dragging');e.stopPropagation()});
+giantLens?.addEventListener('pointercancel',()=>{lensDrag=false;giantLens.classList.remove('dragging')});
+requestAnimationFrame(updateLensReveal);
 </script></body></html/* Página 06 — esteira de rastros */
 const traceRoad=document.getElementById('perspectiveRoad');
 const conveyorTrack=document.getElementById('conveyorTrack');
