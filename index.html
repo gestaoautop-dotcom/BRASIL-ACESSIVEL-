@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-navfix2">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-beltlight">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -140,12 +140,48 @@ function launchFloatCards(){document.querySelectorAll('[data-float]').forEach((c
 document.querySelectorAll('[data-float]').forEach(card=>{let drag=false,dx=0,dy=0;card.addEventListener('pointerdown',e=>{drag=true;const r=card.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;card.setPointerCapture?.(e.pointerId);card.classList.add('dragging');e.stopPropagation()});card.addEventListener('pointermove',e=>{if(!drag||!floatStage)return;const s=floatStage.getBoundingClientRect(),r=card.getBoundingClientRect();let x=Math.max(0,Math.min(s.width-r.width,e.clientX-s.left-dx)),y=Math.max(0,Math.min(s.height-r.height,e.clientY-s.top-dy));card.style.left=x+'px';card.style.top=y+'px';card.style.right='auto';card.style.bottom='auto';card.style.transform='none';e.stopPropagation()});card.addEventListener('pointerup',e=>{drag=false;card.classList.remove('dragging');e.stopPropagation()});});
 
 const road=document.getElementById('perspectiveRoad'),track=document.getElementById('conveyorTrack');let bd=false,last=0,off=0;
-function spill(chip){if(!road)return;const rr=road.getBoundingClientRect(),cr=chip.getBoundingClientRect(),layer=document.createElement('div');layer.className='digital-spill';layer.style.left=(cr.left-rr.left+cr.width/2)+'px';layer.style.top=(cr.top-rr.top+cr.height/2)+'px';const chars='0101HASHDATA{}[]<>/';for(let i=0;i<14;i++){const bit=document.createElement('i');bit.textContent=chars[Math.floor(Math.random()*chars.length)];bit.style.setProperty('--x',((Math.random()-.5)*100)+'px');bit.style.setProperty('--y',(25+Math.random()*100)+'px');bit.style.setProperty('--r',((Math.random()-.5)*80)+'deg');bit.style.setProperty('--d',(Math.random()*100)+'ms');layer.appendChild(bit)}road.appendChild(layer);setTimeout(()=>layer.remove(),1100);chip.classList.remove('belt-dissolve');void chip.offsetWidth;chip.classList.add('belt-dissolve');setTimeout(()=>chip.classList.remove('belt-dissolve'),720)}
-function moveBelt(d){if(!track)return;off+=d;track.style.transform='translateX('+off+'px)';if(Math.abs(d)>2)document.querySelectorAll('#page-6 [data-trace]').forEach((c,i)=>{if((i+Math.round(Math.abs(off)/35))%2===0)spill(c)});if(Math.abs(off)>180){off=0;track.style.transform='translateX(0)'}}
+function spill(chip){
+ if(!road||chip.dataset.spilling==='1')return;
+ chip.dataset.spilling='1';
+ const rr=road.getBoundingClientRect(),cr=chip.getBoundingClientRect(),layer=document.createElement('div');
+ layer.className='digital-spill';
+ layer.style.left=(cr.left-rr.left+cr.width/2)+'px';
+ layer.style.top=(cr.top-rr.top+cr.height/2)+'px';
+ const chars='01HASHDATA{}[]<>';
+ for(let i=0;i<8;i++){
+  const bit=document.createElement('i');
+  bit.textContent=chars[Math.floor(Math.random()*chars.length)];
+  bit.style.setProperty('--x',((Math.random()-.5)*70)+'px');
+  bit.style.setProperty('--y',(18+Math.random()*70)+'px');
+  bit.style.setProperty('--r',((Math.random()-.5)*60)+'deg');
+  bit.style.setProperty('--d',(Math.random()*80)+'ms');
+  layer.appendChild(bit);
+ }
+ road.appendChild(layer);
+ chip.classList.add('belt-dissolve');
+ setTimeout(()=>{layer.remove();chip.classList.remove('belt-dissolve');chip.dataset.spilling='';},650);
+}
+
+function moveBelt(d){
+ if(!track||!road)return;
+ off+=d;
+ track.style.transform='translateX('+off+'px)';
+ const rr=road.getBoundingClientRect();
+ const movingRight=d>0;
+ document.querySelectorAll('#page-6 [data-trace]').forEach(chip=>{
+   const cr=chip.getBoundingClientRect();
+   const behind=movingRight ? cr.right<rr.left+rr.width*.18 : cr.left>rr.right-rr.width*.18;
+   if(behind) spill(chip);
+ });
+ if(off>220)off=220;
+ if(off<-220)off=-220;
+ track.style.transform='translateX('+off+'px)';
+}
 road?.addEventListener('pointerdown',e=>{bd=true;last=e.clientX;road.setPointerCapture?.(e.pointerId);road.classList.add('is-dragging');e.stopPropagation()});
-road?.addEventListener('pointermove',e=>{if(!bd)return;const d=e.clientX-last;last=e.clientX;moveBelt(d);e.stopPropagation()});
+road?.addEventListener('pointermove',e=>{if(!bd)return;const d=e.clientX-last;last=e.clientX;if(Math.abs(d)>0.8)moveBelt(d);e.stopPropagation()});
 road?.addEventListener('pointerup',e=>{bd=false;road.classList.remove('is-dragging');e.stopPropagation()});
-road?.addEventListener('wheel',e=>{e.preventDefault();e.stopPropagation();moveBelt((e.deltaX||e.deltaY)*-.18)},{passive:false});
+road?.addEventListener('pointercancel',()=>{bd=false;road.classList.remove('is-dragging')});
+road?.addEventListener('wheel',e=>{e.preventDefault();e.stopPropagation();moveBelt((e.deltaX||e.deltaY)*-.12)},{passive:false});
 </script></body></html/* Página 06 — esteira de rastros */
 const traceRoad=document.getElementById('perspectiveRoad');
 const conveyorTrack=document.getElementById('conveyorTrack');
