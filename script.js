@@ -36,22 +36,6 @@ if(moodToggle&&page4){
  });
 }
 
-const rouletteItems=[...document.querySelectorAll('.roulette-item')];
-const rouletteTrack=document.getElementById('rouletteTrack');
-let rouletteIndex=0;
-function updateRoulette(){
- if(!rouletteTrack||!rouletteItems.length)return;
- const itemH=rouletteItems[0].offsetHeight+14;
- rouletteTrack.style.transform='translateY('+(-rouletteIndex*itemH)+'px)';
- rouletteItems.forEach((el,i)=>{
-   el.classList.toggle('is-active',i===rouletteIndex);
-   el.classList.toggle('is-near',Math.abs(i-rouletteIndex)===1);
- });
-}
-function moveRoulette(dir){
- if(!rouletteItems.length)return;
- rouletteIndex=(rouletteIndex+dir+rouletteItems.length)%rouletteItems.length;
- updateRoulette();
 }
 document.getElementById('rouletteUp')?.addEventListener('click',()=>moveRoulette(-1));
 document.getElementById('rouletteDown')?.addEventListener('click',()=>moveRoulette(1));
@@ -61,3 +45,31 @@ document.getElementById('rouletteWindow')?.addEventListener('touchstart',e=>roul
 document.getElementById('rouletteWindow')?.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientY-rouletteTouchY;if(Math.abs(d)>35)moveRoulette(d<0?1:-1)},{passive:true});
 window.addEventListener('resize',updateRoulette);
 updateRoulette();
+
+const rouletteCards=[...document.querySelectorAll('.roulette-card')];
+const rouletteTrackH=document.getElementById('rouletteTrack');
+let rouletteIndexH=0;
+function updateHorizontalRoulette(){
+ if(!rouletteTrackH||!rouletteCards.length)return;
+ const cardW=rouletteCards[0].getBoundingClientRect().width+16;
+ const viewport=document.getElementById('rouletteWindow');
+ const centerOffset=viewport?Math.max(0,(viewport.clientWidth-rouletteCards[0].getBoundingClientRect().width)/2):0;
+ rouletteTrackH.style.transform='translateX('+(centerOffset-rouletteIndexH*cardW)+'px)';
+ rouletteCards.forEach((el,i)=>{
+   el.classList.toggle('is-active',i===rouletteIndexH);
+   el.classList.toggle('is-near',Math.abs(i-rouletteIndexH)===1);
+ });
+}
+function moveHorizontalRoulette(dir){
+ if(!rouletteCards.length)return;
+ rouletteIndexH=(rouletteIndexH+dir+rouletteCards.length)%rouletteCards.length;
+ updateHorizontalRoulette();
+}
+document.getElementById('rouletteLeft')?.addEventListener('click',()=>moveHorizontalRoulette(-1));
+document.getElementById('rouletteRight')?.addEventListener('click',()=>moveHorizontalRoulette(1));
+document.getElementById('rouletteWindow')?.addEventListener('wheel',e=>{e.preventDefault();moveHorizontalRoulette(e.deltaY>0||e.deltaX>0?1:-1)},{passive:false});
+let rouletteTouchX=0;
+document.getElementById('rouletteWindow')?.addEventListener('touchstart',e=>rouletteTouchX=e.changedTouches[0].clientX,{passive:true});
+document.getElementById('rouletteWindow')?.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-rouletteTouchX;if(Math.abs(d)>35)moveHorizontalRoulette(d<0?1:-1)},{passive:true});
+window.addEventListener('resize',updateHorizontalRoulette);
+updateHorizontalRoulette();
