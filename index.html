@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-0525">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-float05">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -45,30 +45,19 @@
  <button class="next" data-next="page-5">→</button>
 </section>
 
-<section class="screen manifesto data-page roulette-page" id="page-5">
+<section class="screen manifesto data-page float-page" id="page-5">
  <button class="back" data-prev="page-4">←</button>
- <div class="roulette-center">
+ <div class="float-stage" id="floatStage">
    <small>05</small>
-   <div class="mini-label">ENTÃO VAMOS</div>
-   <h2>USAR ISSO<br>A NOSSO FAVOR.</h2>
-   <p>Diferentes fontes. Cruzamentos. Registros reais.</p>
-
-   <div class="horizontal-roulette-wrap">
-     <button class="h-control" id="rouletteLeft" type="button" aria-label="Rolar para a esquerda">←</button>
-     <div class="horizontal-roulette" id="rouletteWindow" aria-label="Fontes e tecnologias">
-       <div class="horizontal-track" id="rouletteTrack">
-         <button class="roulette-card">DADOS</button>
-         <button class="roulette-card">SATÉLITES</button>
-         <button class="roulette-card">REGISTROS</button>
-         <button class="roulette-card">CRIPTOGRAFIA</button>
-         <button class="roulette-card">FONTES PÚBLICAS</button>
-         <button class="roulette-card">AUDITORIAS</button>
-         <button class="roulette-card">BACKUPS</button>
-         <button class="roulette-card">CYBERSEGURANÇA</button>
-       </div>
-     </div>
-     <button class="h-control" id="rouletteRight" type="button" aria-label="Rolar para a direita">→</button>
-   </div>
+   <div class="float-copy"><div class="mini-label">ENTÃO VAMOS</div><h2>USAR ISSO<br>A NOSSO FAVOR.</h2><p>Diferentes fontes. Cruzamentos. Registros reais.</p></div>
+   <button class="float-card fc1" data-float>DADOS</button>
+   <button class="float-card fc2" data-float>SATÉLITES</button>
+   <button class="float-card fc3" data-float>REGISTROS</button>
+   <button class="float-card fc4" data-float>CRIPTOGRAFIA</button>
+   <button class="float-card fc5" data-float>FONTES PÚBLICAS</button>
+   <button class="float-card fc6" data-float>AUDITORIAS</button>
+   <button class="float-card fc7" data-float>BACKUPS</button>
+   <button class="float-card fc8" data-float>CYBERSEGURANÇA</button>
  </div>
  <button class="next" data-next="page-6">→</button>
 </section>
@@ -120,7 +109,7 @@ function show(id,direction=1){
   if(id==='page-3') startSurveillanceLoop();
   else stopSurveillanceLoop();
 
-  if(id==='page-5') setTimeout(updateHorizontalRoulette,50);
+  
 }
 
 document.querySelectorAll('[data-next]').forEach(b=>{
@@ -189,50 +178,38 @@ if(moodToggle&&page4){
   });
 }
 
-/* Página 05 */
-const rouletteCards=[...document.querySelectorAll('.roulette-card')];
-const rouletteTrack=document.getElementById('rouletteTrack');
-const rouletteWindow=document.getElementById('rouletteWindow');
-let rouletteIndex=0;
-
-function updateHorizontalRoulette(){
-  if(!rouletteTrack||!rouletteCards.length||!rouletteWindow) return;
-  const cardWidth=rouletteCards[0].getBoundingClientRect().width;
-  const gap=16;
-  const centerOffset=Math.max(0,(rouletteWindow.clientWidth-cardWidth)/2);
-  rouletteTrack.style.transform='translateX('+(centerOffset-rouletteIndex*(cardWidth+gap))+'px)';
-
-  rouletteCards.forEach((el,i)=>{
-    el.classList.toggle('is-active',i===rouletteIndex);
-    el.classList.toggle('is-near',Math.abs(i-rouletteIndex)===1);
-  });
-}
-
-function moveHorizontalRoulette(dir){
-  if(!rouletteCards.length)return;
-  rouletteIndex=(rouletteIndex+dir+rouletteCards.length)%rouletteCards.length;
-  updateHorizontalRoulette();
-}
-
-document.getElementById('rouletteLeft')?.addEventListener('click',()=>moveHorizontalRoulette(-1));
-document.getElementById('rouletteRight')?.addEventListener('click',()=>moveHorizontalRoulette(1));
-
-rouletteWindow?.addEventListener('wheel',e=>{
-  e.preventDefault();
-  moveHorizontalRoulette((e.deltaX>0||e.deltaY>0)?1:-1);
-},{passive:false});
-
-let rouletteTouchX=0;
-rouletteWindow?.addEventListener('touchstart',e=>{
-  rouletteTouchX=e.changedTouches[0].clientX;
-},{passive:true});
-
-rouletteWindow?.addEventListener('touchend',e=>{
-  const delta=e.changedTouches[0].clientX-rouletteTouchX;
-  if(Math.abs(delta)>35) moveHorizontalRoulette(delta<0?1:-1);
-},{passive:true});
-
-window.addEventListener('resize',updateHorizontalRoulette);
-updateHorizontalRoulette();
-
+/* Página 05 — placas livres */
+const floatStage=document.getElementById('floatStage');
+const floatCards=[...document.querySelectorAll('[data-float]')];
+floatCards.forEach(card=>{
+ let dragging=false,dx=0,dy=0;
+ const down=e=>{
+   dragging=true;
+   const p=e.touches?e.touches[0]:e;
+   const r=card.getBoundingClientRect();
+   dx=p.clientX-r.left; dy=p.clientY-r.top;
+   card.classList.add('dragging');
+   e.stopPropagation();
+ };
+ const move=e=>{
+   if(!dragging||!floatStage)return;
+   const p=e.touches?e.touches[0]:e;
+   const sr=floatStage.getBoundingClientRect();
+   const cr=card.getBoundingClientRect();
+   let x=p.clientX-sr.left-dx, y=p.clientY-sr.top-dy;
+   x=Math.max(0,Math.min(sr.width-cr.width,x));
+   y=Math.max(0,Math.min(sr.height-cr.height,y));
+   card.style.left=x+'px'; card.style.top=y+'px';
+   card.style.right='auto'; card.style.bottom='auto';
+   card.style.transform='none';
+   if(e.cancelable)e.preventDefault();
+ };
+ const up=()=>{dragging=false;card.classList.remove('dragging')};
+ card.addEventListener('mousedown',down);
+ card.addEventListener('touchstart',down,{passive:false});
+ window.addEventListener('mousemove',move);
+ window.addEventListener('touchmove',move,{passive:false});
+ window.addEventListener('mouseup',up);
+ window.addEventListener('touchend',up);
+});
 </script></body></html>
