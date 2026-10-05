@@ -395,3 +395,32 @@
 .giant-lens.lens-drop{animation:lensDropIn 1.05s cubic-bezier(.18,.85,.24,1.08) both}
 @keyframes lensDropIn{0%{opacity:0;transform:translate(-50%,-155%) rotate(-28deg) scale(.72)}65%{opacity:1;transform:translate(-50%,-43%) rotate(-8deg) scale(1.04)}82%{transform:translate(-50%,-53%) rotate(-13deg) scale(.98)}100%{transform:translate(-50%,-50%) rotate(-12deg) scale(1)}}
 @media(max-width:700px){.people-scene{width:94vw;transform:translate(-50%,-47%)}.people-scene-sharp{transform:translate(-50%,-47%) scale(var(--zoom,1.13))}.people-scene .people-word{font-size:19vw}.people-scene h2{font-size:11.4vw}.people-scene .who{font-size:4.2vw;margin-bottom:30px}.people-actions{font-size:3.55vw;line-height:1.9}.people-party{font-size:4.5vw}.people-scene-blur{filter:blur(4px);opacity:.38}}
+
+/* page07 realistic falling lens override */
+.giant-lens.lens-drop{transform-origin:38% 38%;animation:lensPhysicalDrop 1.38s linear both!important;pointer-events:none}
+@keyframes lensPhysicalDrop{
+ 0%{opacity:0;transform:translate(-50%,-190%) rotate(-34deg) scale(.82)}
+ 12%{opacity:1}
+ 46%{transform:translate(-50%,-40%) rotate(-16deg) scale(1.02)}
+ 57%{transform:translate(-50%,-50%) rotate(-10deg) scale(1)}
+ 66%{transform:translate(-50%,-59%) rotate(-15deg) scale(.985)}
+ 75%{transform:translate(-50%,-50%) rotate(-12deg) scale(1)}
+ 83%{transform:translate(-50%,-54%) rotate(-13.5deg) scale(.995)}
+ 91%{transform:translate(-50%,-50%) rotate(-12deg) scale(1)}
+ 100%{opacity:1;transform:translate(-50%,-50%) rotate(-12deg) scale(1)}
+}
+.people-stage:has(.lens-drop) .people-scene-blur{animation:pageImpact 1.38s linear both}
+@keyframes pageImpact{0%,48%{transform:translate(-50%,-48%)}57%{transform:translate(-50%,-47.3%)}67%{transform:translate(-50%,-48.35%)}78%,100%{transform:translate(-50%,-48%)}}
+@media(max-width:700px){
+ .giant-lens.lens-drop{animation-name:lensPhysicalDropMobile!important}
+ @keyframes lensPhysicalDropMobile{
+  0%{opacity:0;transform:translate(-50%,-205%) rotate(-32deg) scale(.8)}
+  10%{opacity:1}
+  45%{transform:translate(-50%,-37%) rotate(-15deg) scale(1.025)}
+  57%{transform:translate(-50%,-50%) rotate(-10deg) scale(1)}
+  67%{transform:translate(-50%,-59%) rotate(-15deg) scale(.985)}
+  76%{transform:translate(-50%,-50%) rotate(-12deg) scale(1)}
+  85%{transform:translate(-50%,-54%) rotate(-13deg) scale(.995)}
+  93%,100%{opacity:1;transform:translate(-50%,-50%) rotate(-12deg) scale(1)}
+ }
+}
