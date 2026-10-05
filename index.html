@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-spill06">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-belt06">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -63,44 +63,32 @@
  <button class="next" data-next="page-6">→</button>
 </section>
 
-<section class="screen manifesto trace-road-page" id="page-6">
+<section class="screen manifesto trace-road-page conveyor-page" id="page-6">
  <button class="back" data-prev="page-5">←</button>
  <div class="trace-road-stage">
    <small>06</small>
    <div class="trace-road-copy">
      <h2>TUDO DEIXA RASTRO.</h2>
-     <p>Movimentos deixam registros. Registros contam histórias.</p>
+     <p class="impact-line">Movimentos deixam registros.<br><strong>Registros contam histórias.</strong></p>
    </div>
 
-   <div class="data-road" aria-hidden="true">
-     <svg viewBox="0 0 1200 520" preserveAspectRatio="none">
-       <defs>
-         <linearGradient id="roadGlow" x1="0" y1="0" x2="1" y2="0">
-           <stop offset="0%" stop-color="#159447"/>
-           <stop offset="48%" stop-color="#ffcf22"/>
-           <stop offset="100%" stop-color="#063b78"/>
-         </linearGradient>
-       </defs>
-       <path class="road-base" d="M-40 410 C180 270 300 500 500 320 S820 120 1240 250"/>
-       <path class="road-glow" d="M-40 410 C180 270 300 500 500 320 S820 120 1240 250"/>
-       <path class="road-code-line" d="M-40 410 C180 270 300 500 500 320 S820 120 1240 250"/>
-     </svg>
-     <div class="road-code rc1">01001101 / HASH / 110101</div>
-     <div class="road-code rc2">LOG 24.08 / NODE 07 / VERIFIED</div>
-     <div class="road-code rc3">10110010 / DATA / TRACE / 001</div>
-
-     <span class="foot fp1">◖</span><span class="foot fp2">◗</span>
-     <span class="foot fp3">◖</span><span class="foot fp4">◗</span>
-     <span class="foot fp5">◖</span><span class="foot fp6">◗</span>
-
-     <span class="road-word rw1">DINHEIRO</span>
-     <span class="road-word rw2">VOTAÇÃO</span>
-     <span class="road-word rw3">CONTRATO</span>
-     <span class="road-word rw4">DECISÃO</span>
-     <span class="road-word rw5">PROMESSA</span>
+   <div class="conveyor-wrap">
+     <div class="conveyor" id="perspectiveRoad">
+       <div class="conveyor-data"></div>
+       <div class="conveyor-track" id="conveyorTrack">
+         <button class="trace-chip" data-trace>DADOS</button>
+         <button class="trace-chip" data-trace>DINHEIRO</button>
+         <button class="trace-chip" data-trace>VOTAÇÃO</button>
+         <button class="trace-chip" data-trace>CONTRATO</button>
+         <button class="trace-chip" data-trace>DECISÃO</button>
+         <button class="trace-chip" data-trace>PROMESSA</button>
+         <button class="trace-chip" data-trace>REGISTRO</button>
+       </div>
+     </div>
+     <div class="belt-hint"><span>↔</span> ARRASTE A ESTEIRA</div>
    </div>
 
-   <div class="trace-ending">Tudo passa. <strong>O rastro fica.</strong></div>
+   <div class="trace-ending">Tudo passa.<br><strong>O RASTRO FICA.</strong></div>
  </div>
  <button class="next" data-next="page-7">→</button>
 </section>
@@ -308,4 +296,84 @@ floatCards.forEach(card=>{
  window.addEventListener('mouseup',up);
  window.addEventListener('touchend',up);
 });
+</script></body></html/* Página 06 — esteira de rastros */
+const traceRoad=document.getElementById('perspectiveRoad');
+const conveyorTrack=document.getElementById('conveyorTrack');
+let beltDragging=false,beltStartX=0,beltLastX=0,beltOffset=0;
+
+function launchTraceRoad(){
+ const chips=[...document.querySelectorAll('#page-6 [data-trace]')];
+ chips.forEach((chip,i)=>{
+   chip.style.opacity='0';
+   chip.style.transform='translateX(-70px)';
+   setTimeout(()=>{
+     chip.style.transition='opacity .45s ease,transform .7s cubic-bezier(.16,.82,.24,1)';
+     chip.style.opacity='1';chip.style.transform='translateX(0)';
+   },i*85);
+ });
+}
+
+function spillFromChip(chip,intensity=1){
+ if(!traceRoad)return;
+ const rr=traceRoad.getBoundingClientRect(),cr=chip.getBoundingClientRect();
+ const layer=document.createElement('div');
+ layer.className='digital-spill';
+ layer.style.left=(cr.left-rr.left+cr.width/2)+'px';
+ layer.style.top=(cr.top-rr.top+cr.height/2)+'px';
+ const chars='010101001101HASHDATA{}[]<>/';
+ const count=Math.max(10,Math.round(18*intensity));
+ for(let i=0;i<count;i++){
+   const bit=document.createElement('i');
+   bit.textContent=chars[Math.floor(Math.random()*chars.length)];
+   bit.style.setProperty('--x',((Math.random()-.5)*100)+'px');
+   bit.style.setProperty('--y',(25+Math.random()*105)+'px');
+   bit.style.setProperty('--r',((Math.random()-.5)*80)+'deg');
+   bit.style.setProperty('--d',(Math.random()*120)+'ms');
+   layer.appendChild(bit);
+ }
+ traceRoad.appendChild(layer);
+ setTimeout(()=>layer.remove(),1200);
+ chip.classList.remove('belt-dissolve');
+ void chip.offsetWidth;
+ chip.classList.add('belt-dissolve');
+ setTimeout(()=>chip.classList.remove('belt-dissolve'),720);
+}
+
+function moveBelt(delta){
+ if(!conveyorTrack)return;
+ beltOffset+=delta;
+ conveyorTrack.style.transform='translateX('+beltOffset+'px)';
+ const chips=[...document.querySelectorAll('#page-6 [data-trace]')];
+ chips.forEach((chip,i)=>{
+   if(Math.abs(delta)>2 && (i+Math.round(Math.abs(beltOffset)/35))%2===0) spillFromChip(chip,Math.min(1.5,Math.abs(delta)/18+.55));
+ });
+ if(Math.abs(beltOffset)>180){
+   beltOffset=0;
+   conveyorTrack.style.transition='none';
+   conveyorTrack.style.transform='translateX(0)';
+   requestAnimationFrame(()=>conveyorTrack.style.transition='');
+ }
+}
+
+traceRoad?.addEventListener('pointerdown',e=>{
+ beltDragging=true;beltStartX=beltLastX=e.clientX;
+ traceRoad.setPointerCapture?.(e.pointerId);
+ traceRoad.classList.add('is-dragging');
+});
+traceRoad?.addEventListener('pointermove',e=>{
+ if(!beltDragging)return;
+ const d=e.clientX-beltLastX;
+ beltLastX=e.clientX;
+ if(Math.abs(d)>1)moveBelt(d);
+});
+traceRoad?.addEventListener('pointerup',e=>{
+ beltDragging=false;traceRoad.classList.remove('is-dragging');
+});
+traceRoad?.addEventListener('pointercancel',()=>{
+ beltDragging=false;traceRoad.classList.remove('is-dragging');
+});
+traceRoad?.addEventListener('wheel',e=>{
+ e.preventDefault();
+ moveBelt((e.deltaX||e.deltaY)*-.18);
+},{passive:false});
 </script></body></html>
