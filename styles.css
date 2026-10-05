@@ -424,3 +424,212 @@
   93%,100%{opacity:1;transform:translate(-50%,-50%) rotate(-12deg) scale(1)}
  }
 }
+
+/* =========================================================
+   TIMTIM — VISUAL SYSTEM 2026 / referência: fluxo, vidro, dados
+   ========================================================= */
+:root{
+ --tt-bg:#030806;
+ --tt-bg2:#07100c;
+ --tt-ink:#0d1712;
+ --tt-paper:#f5f7f3;
+ --tt-green:#18e889;
+ --tt-green-deep:#0b7d4b;
+ --tt-blue:#0d5aa7;
+ --tt-yellow:#ffd84a;
+ --tt-line:rgba(255,255,255,.14);
+ --tt-glass:rgba(255,255,255,.07);
+}
+body{background:#020604}
+.screen{
+ transition:opacity .62s ease,transform .62s cubic-bezier(.18,.8,.24,1),filter .62s ease;
+ transform:translateX(34px) scale(.992);
+ filter:blur(5px);
+}
+.screen.is-active{transform:none;filter:none}
+.screen.slide-out-left{transform:translateX(-42px) scale(.99);filter:blur(5px)}
+.screen.slide-out-right{transform:translateX(42px) scale(.99);filter:blur(5px)}
+.screen:after{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+ background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.045),transparent 28%);
+}
+.screen>*{position:relative;z-index:1}
+.back,.next{z-index:80}
+.back{
+ width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+ background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.11);
+ backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
+ transition:.25s ease;
+}
+.back:hover{transform:translateX(-3px);background:rgba(255,255,255,.11)}
+.next{
+ width:68px;height:68px;background:rgba(9,12,10,.92);
+ border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 42px rgba(0,0,0,.2);
+ backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.next:hover{transform:translateX(3px) scale(1.03)}
+.manifesto small,.politics small{font:600 12px/1 Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase}
+
+/* 01 — entrada escura premium, curiosa */
+#page-1{
+ background:
+ radial-gradient(circle at 50% 34%,rgba(24,232,137,.17),transparent 18%),
+ radial-gradient(ellipse at 50% 105%,rgba(13,90,167,.22),transparent 36%),
+ #020705;color:#fff;
+}
+#page-1:before{
+ content:"";position:absolute;inset:-12%;pointer-events:none;
+ background:
+ radial-gradient(ellipse at 18% 76%,transparent 0 43%,rgba(24,232,137,.15) 44%,transparent 46%),
+ radial-gradient(ellipse at 82% 76%,transparent 0 43%,rgba(13,90,167,.16) 44%,transparent 46%);
+ filter:blur(11px);animation:ttWaveBreath 5.6s ease-in-out infinite alternate;
+}
+#page-1 .center{width:min(1000px,90vw)}
+#page-1 h1{
+ font-family:Arial,Helvetica,sans-serif;font-weight:500;letter-spacing:-.055em;
+ font-size:clamp(56px,7.5vw,118px);line-height:.9;margin-bottom:46px;
+ text-shadow:0 18px 55px rgba(0,0,0,.45)
+}
+#page-1 .pill{
+ color:#fff;border-color:rgba(255,255,255,.2);
+ background:rgba(255,255,255,.07);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+ box-shadow:inset 0 1px rgba(255,255,255,.16),0 16px 42px rgba(0,0,0,.18)
+}
+#page-1 .pill:hover{background:#fff;color:#07100c}
+
+/* 02 — clareza: fundo claro + sinal de complexidade */
+#page-2{
+ background:
+ radial-gradient(circle at 50% 82%,rgba(24,232,137,.11),transparent 28%),
+ linear-gradient(#f8faf7,#eef4ef);color:#101611;
+}
+#page-2 .back{color:#111;background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.08)}
+#page-2 .politics-center{width:min(1040px,92vw)}
+#page-2 h2{font-family:Arial,Helvetica,sans-serif;font-weight:500;letter-spacing:-.055em}
+#page-2 .scribble{
+ margin-top:18px;padding:16px;border-radius:34px;
+ background:rgba(255,255,255,.5);border:1px solid rgba(0,0,0,.07);
+ box-shadow:0 22px 65px rgba(15,60,35,.08);backdrop-filter:blur(12px)
+}
+#page-2 .term{box-shadow:0 8px 22px rgba(0,0,0,.08);background:rgba(255,255,255,.9)}
+#page-2 .scribble svg{filter:saturate(.92)}
+
+/* 03 — tecnologia/rastro */
+#page-3{
+ background:
+ radial-gradient(circle at 50% 38%,rgba(24,232,137,.17),transparent 22%),
+ linear-gradient(180deg,#010604,#06100b 62%,#020605);
+}
+#page-3 .code-rain{opacity:.5;mask-image:linear-gradient(to bottom,transparent,black 20%,black 80%,transparent)}
+#page-3 .warning-sign{
+ box-shadow:0 32px 85px rgba(0,0,0,.45),0 0 85px rgba(24,232,137,.10);
+ transform:perspective(1000px) rotateX(2deg)
+}
+#page-3 .surveillance-center p{color:rgba(255,255,255,.62);letter-spacing:.06em}
+
+/* 04 — respiro claro + vidro */
+#page-4{
+ background:
+ radial-gradient(circle at 50% 58%,rgba(24,232,137,.12),transparent 25%),
+ #f7f8f5;color:#0e1411;
+}
+#page-4 .back{color:#111;background:rgba(255,255,255,.75);border-color:rgba(0,0,0,.08)}
+#page-4 h2{font-family:Arial,Helvetica,sans-serif;font-weight:500;letter-spacing:-.06em}
+#page-4 .glass-toggle{
+ box-shadow:0 18px 55px rgba(15,55,30,.09),inset 0 1px rgba(255,255,255,.7)
+}
+#page-4 .discussion{font-weight:650;letter-spacing:-.03em}
+#page-4 .aside{color:#69736d}
+
+/* 05 — núcleo de ferramentas */
+#page-5{background:
+ radial-gradient(circle at 22% 34%,rgba(24,232,137,.18),transparent 24%),
+ radial-gradient(circle at 80% 32%,rgba(13,90,167,.23),transparent 26%),
+ radial-gradient(circle at 53% 84%,rgba(255,216,74,.10),transparent 20%),
+ #020705!important}
+#page-5 .float-copy h2{
+ font-family:Arial,Helvetica,sans-serif;font-weight:500;letter-spacing:-.06em;
+}
+#page-5 .float-card{
+ border-radius:24px!important;background:rgba(255,255,255,.07)!important;
+ border:1px solid rgba(255,255,255,.18)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.18),0 24px 55px rgba(0,0,0,.22)!important;
+}
+#page-5 .float-card:nth-of-type(3n+1){box-shadow:inset 0 1px rgba(255,255,255,.18),0 0 34px rgba(24,232,137,.12)!important}
+#page-5 .float-card:nth-of-type(3n+2){box-shadow:inset 0 1px rgba(255,255,255,.18),0 0 34px rgba(13,90,167,.16)!important}
+#page-5 .float-card:nth-of-type(3n){box-shadow:inset 0 1px rgba(255,255,255,.18),0 0 34px rgba(255,216,74,.10)!important}
+
+/* 06 — rastro: mais cinematográfico, menos ruído */
+#page-6{
+ background:
+ radial-gradient(ellipse at 50% 58%,rgba(24,232,137,.15),transparent 34%),
+ linear-gradient(180deg,#020705,#06120c 58%,#010503)!important;
+}
+#page-6 .trace-road-copy h2{
+ font-family:Arial,Helvetica,sans-serif;font-weight:500;letter-spacing:-.06em
+}
+#page-6 .impact-line{font-weight:450}
+#page-6 .conveyor{
+ border-color:rgba(24,232,137,.14);
+ background:linear-gradient(180deg,rgba(24,232,137,.025),rgba(255,255,255,.02),rgba(13,90,167,.035));
+ box-shadow:inset 0 1px rgba(255,255,255,.04),0 28px 80px rgba(0,0,0,.18)
+}
+#page-6 .conveyor-data{opacity:.6}
+#page-6 .trace-chip{
+ background:rgba(255,255,255,.055)!important;border-color:rgba(255,255,255,.16)!important;
+ backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
+}
+#page-6 .trace-ending strong{color:var(--tt-green)}
+
+/* 07 — investigação, lupa */
+#page-7{
+ background:
+ radial-gradient(circle at 50% 55%,rgba(24,232,137,.08),transparent 28%),
+ linear-gradient(#fafbf8,#f2f5f1)!important;
+}
+#page-7 .back{color:#111;background:rgba(255,255,255,.75);border-color:rgba(0,0,0,.08)}
+#page-7 .people-scene .people-word,
+#page-7 .people-scene h2{font-family:Arial,Helvetica,sans-serif;font-weight:500;letter-spacing:-.06em}
+#page-7 .people-scene-blur{opacity:.28!important;filter:blur(7px)!important}
+#page-7 .people-actions{font-weight:700}
+#page-7 .lens-glass{
+ box-shadow:inset 0 0 0 2px rgba(255,255,255,.85),inset 0 0 42px rgba(255,255,255,.28),0 26px 70px rgba(15,45,28,.16)!important;
+}
+#page-7 .lens-glass:before{
+ content:"";position:absolute;inset:8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 22% 20%,rgba(255,255,255,.22),transparent 20%),
+ radial-gradient(circle at 73% 72%,rgba(24,232,137,.07),transparent 32%);
+}
+
+/* 08 — conclusão/portal */
+#page-8{
+ background:
+ radial-gradient(circle at 50% 42%,rgba(24,232,137,.17),transparent 22%),
+ radial-gradient(circle at 50% 100%,rgba(13,90,167,.20),transparent 34%),
+ #020705;color:#fff;
+}
+#page-8 h2,#page-8 h3{font-family:Arial,Helvetica,sans-serif;font-weight:500;letter-spacing:-.06em}
+#page-8 h3{color:var(--tt-green)}
+#page-8 p{color:rgba(255,255,255,.7)}
+#page-8 .timtim-mark{
+ filter:drop-shadow(0 24px 55px rgba(24,232,137,.16))
+}
+#page-8 .pill.inverse{
+ color:#fff;background:rgba(255,255,255,.065);border-color:rgba(255,255,255,.18);
+ backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)
+}
+#page-8 .pill.inverse:hover{background:#fff;color:#07100c}
+
+@keyframes ttWaveBreath{
+ 0%{transform:translate3d(-1.5%,1%,0) scale(1)}
+ 100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}
+}
+
+@media(max-width:700px){
+ .back{width:44px;height:44px;left:14px;top:14px}
+ .next{width:58px;height:58px;right:18px;bottom:22px}
+ #page-1 h1{font-size:14vw}
+ #page-2 .scribble{border-radius:24px;padding:8px}
+ #page-5 .float-card{border-radius:18px!important}
+ #page-8 .center{width:90vw}
+}
