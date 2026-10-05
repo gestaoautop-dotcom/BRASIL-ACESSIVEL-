@@ -74,3 +74,29 @@
  .roulette-window:before,.roulette-window:after{height:88px}
  .roulette-controls{justify-content:center;padding-left:0}
 }
+
+/* PAGE 05 — frase central + cards horizontais */
+.roulette-page{background:radial-gradient(circle at 50% 38%,rgba(255,218,54,.12),transparent 26%),#f7f7f3}
+.roulette-center{width:min(1180px,94vw);text-align:center;position:relative}
+.roulette-center>small{display:block;letter-spacing:.22em;color:#8a8a8a;margin-bottom:10px}
+.roulette-center .mini-label{font-size:14px;letter-spacing:.18em;font-weight:800;margin-bottom:10px}
+.roulette-center h2{font-size:clamp(58px,7.5vw,118px);line-height:.87;margin:0 0 24px}
+.roulette-center>p{font-size:clamp(19px,2vw,30px);line-height:1.25;color:#555;margin:0 auto 36px;max-width:720px}
+.horizontal-roulette-wrap{display:grid;grid-template-columns:52px 1fr 52px;gap:14px;align-items:center;width:100%}
+.horizontal-roulette{overflow:hidden;position:relative;padding:10px 0}
+.horizontal-roulette:before,.horizontal-roulette:after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:3;pointer-events:none}
+.horizontal-roulette:before{left:0;background:linear-gradient(90deg,#f7f7f3,rgba(247,247,243,0))}
+.horizontal-roulette:after{right:0;background:linear-gradient(270deg,#f7f7f3,rgba(247,247,243,0))}
+.horizontal-track{display:flex;gap:16px;transition:transform .65s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.roulette-card{flex:0 0 clamp(180px,22vw,280px);height:96px;border-radius:20px;border:1px solid rgba(0,0,0,.16);background:rgba(255,255,255,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-size:clamp(18px,2vw,28px);font-weight:800;letter-spacing:.04em;color:#111;opacity:.48;filter:blur(1.1px);transform:scale(.94);transition:.5s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+.roulette-card.is-active{opacity:1;filter:blur(0);transform:scale(1);background:rgba(255,255,255,.68);border-color:rgba(0,0,0,.30);box-shadow:0 16px 42px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.9)}
+.roulette-card.is-near{opacity:.72;filter:blur(.4px);transform:scale(.97)}
+.h-control{width:52px;height:52px;border-radius:50%;border:1px solid rgba(0,0,0,.14);background:rgba(255,255,255,.5);backdrop-filter:blur(10px);font-size:22px;cursor:pointer}
+@media(max-width:800px){
+ .roulette-center h2{font-size:13vw}
+ .roulette-center>p{font-size:5vw;margin-bottom:24px}
+ .horizontal-roulette-wrap{grid-template-columns:42px 1fr 42px;gap:8px}
+ .h-control{width:42px;height:42px;font-size:18px}
+ .roulette-card{flex-basis:70vw;height:82px;font-size:6vw}
+ .horizontal-roulette:before,.horizontal-roulette:after{width:42px}
+}
