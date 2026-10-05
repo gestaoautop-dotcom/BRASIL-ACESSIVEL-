@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-lenszoom07">
+<title>TIMTIM — por tim-tim</title><link rel="stylesheet" href="styles.css?v=20261005-lensfall-real">
 </head>
 <body><main class="app" aria-live="polite">
 
@@ -164,6 +164,7 @@ function show(id,direction=1){
  setTimeout(()=>cur.classList.remove('slide-out-left','slide-out-right'),650);
  if(id==='page-3')startSurveillanceLoop();else stopSurveillanceLoop();
  if(id==='page-5'&&direction>0)launchFloatCards();
+ if(id==='page-7')dropLens();
 }
 document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();show(b.dataset.next,1)}));
 document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();show(b.dataset.prev,-1)}));
@@ -253,7 +254,14 @@ function updateLensReveal(){
  lensReveal.style.setProperty('--lr',(lr.width*.34)+'px');
  lensReveal.style.setProperty('--zoom','1.13');
 }
-giantLens?.addEventListener('animationend',()=>giantLens.classList.remove('lens-drop'),{once:true});
+function dropLens(){
+ if(!giantLens)return;
+ giantLens.classList.remove('lens-drop');
+ giantLens.style.left='50%';giantLens.style.top='50%';giantLens.style.transform='';
+ void giantLens.offsetWidth;
+ giantLens.classList.add('lens-drop');
+ setTimeout(()=>{giantLens.classList.remove('lens-drop');updateLensReveal()},1450);
+}
 giantLens?.addEventListener('pointerdown',e=>{lensDrag=true;const r=giantLens.getBoundingClientRect();lensDX=e.clientX-r.left;lensDY=e.clientY-r.top;giantLens.setPointerCapture?.(e.pointerId);giantLens.classList.add('dragging');e.stopPropagation()});
 giantLens?.addEventListener('pointermove',e=>{if(!lensDrag||!peopleStage)return;const st=peopleStage.getBoundingClientRect(),r=giantLens.getBoundingClientRect();let x=Math.max(-r.width*.28,Math.min(st.width-r.width*.72,e.clientX-st.left-lensDX)),y=Math.max(-r.width*.28,Math.min(st.height-r.height*.62,e.clientY-st.top-lensDY));giantLens.style.left=x+'px';giantLens.style.top=y+'px';giantLens.style.transform='none';updateLensReveal();e.stopPropagation()});
 giantLens?.addEventListener('pointerup',e=>{lensDrag=false;giantLens.classList.remove('dragging');e.stopPropagation()});
