@@ -1,8 +1,8 @@
 {
   "source": "Câmara dos Deputados",
   "url": "https://dadosabertos.camara.leg.br/api/v2/deputados?itens=100&ordem=ASC&ordenarPor=nome",
-  "fetchedAt": "2026-10-25T13:45:09.863Z",
-  "hash": "e5f84c664c60fc5a69c779025cd55f80272b01da2b665e872c86c7064fff946a",
+  "fetchedAt": "2026-10-26T16:11:05.290Z",
+  "hash": "2ff25a5d67d30f7eef04198f3b7c1940a8a11e1cf6fd836c059ad5ee1461d93b",
   "count": 513,
   "records": [
     {
@@ -3425,19 +3425,6 @@
       "inicio": null
     },
     {
-      "id": "camara:74140",
-      "nome": "José Carlos Araujo",
-      "cargo": "Deputado(a) federal",
-      "orgao": "Câmara dos Deputados",
-      "poder": "Legislativo",
-      "uf": "BA",
-      "partido": "DC",
-      "foto": "https://www.camara.leg.br/internet/deputado/bandep/74140.jpg",
-      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/74140",
-      "remuneracao": null,
-      "inicio": null
-    },
-    {
       "id": "camara:204472",
       "nome": "José Medeiros",
       "cargo": "Deputado(a) federal",
@@ -3798,6 +3785,19 @@
       "partido": "REPUBLICANOS",
       "foto": "https://www.camara.leg.br/internet/deputado/bandep/220566.jpg",
       "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/220566",
+      "remuneracao": null,
+      "inicio": null
+    },
+    {
+      "id": "camara:80815",
+      "nome": "Leo Prates",
+      "cargo": "Deputado(a) federal",
+      "orgao": "Câmara dos Deputados",
+      "poder": "Legislativo",
+      "uf": "BA",
+      "partido": "REPUBLICANOS",
+      "foto": "https://www.camara.leg.br/internet/deputado/bandep/80815.jpg",
+      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/80815",
       "remuneracao": null,
       "inicio": null
     },
