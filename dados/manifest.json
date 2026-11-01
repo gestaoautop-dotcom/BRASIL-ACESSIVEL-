@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-31T15:23:13.055Z",
+  "updatedAt": "2026-11-01T16:06:05.102Z",
   "status": {
     "camara_deputados": "error",
     "senado_senadores": "ok"
@@ -18,7 +18,7 @@
       "name": "Senado Federal",
       "sourceUrl": "https://legis.senado.leg.br/dadosabertos/senador/lista/atual.json",
       "count": 81,
-      "fetchedAt": "2026-10-31T15:23:13.055Z",
+      "fetchedAt": "2026-11-01T16:06:05.102Z",
       "hash": "d0954d4a7a86c8b46cc677f533a14ce3335d4f6d06d9bf823ee12fc004567ea8",
       "status": "ok"
     }
