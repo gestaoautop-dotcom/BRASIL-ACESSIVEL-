@@ -1,8 +1,8 @@
 {
   "source": "Câmara dos Deputados",
   "url": "https://dadosabertos.camara.leg.br/api/v2/deputados?itens=100&ordem=ASC&ordenarPor=nome",
-  "fetchedAt": "2026-11-05T17:27:38.512Z",
-  "hash": "2ff25a5d67d30f7eef04198f3b7c1940a8a11e1cf6fd836c059ad5ee1461d93b",
+  "fetchedAt": "2026-11-06T16:49:30.526Z",
+  "hash": "434f5f2328dedcddbae6fe7cb1c7e2e4bd3743acf66128a62857300a55659709",
   "count": 513,
   "records": [
     {
@@ -3802,19 +3802,6 @@
       "inicio": null
     },
     {
-      "id": "camara:122195",
-      "nome": "Leonardo Gadelha",
-      "cargo": "Deputado(a) federal",
-      "orgao": "Câmara dos Deputados",
-      "poder": "Legislativo",
-      "uf": "PB",
-      "partido": "PODE",
-      "foto": "https://www.camara.leg.br/internet/deputado/bandep/122195.jpg",
-      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/122195",
-      "remuneracao": null,
-      "inicio": null
-    },
-    {
       "id": "camara:74156",
       "nome": "Leonardo Monteiro",
       "cargo": "Deputado(a) federal",
@@ -5826,6 +5813,19 @@
       "partido": "PT",
       "foto": "https://www.camara.leg.br/internet/deputado/bandep/204480.jpg",
       "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/204480",
+      "remuneracao": null,
+      "inicio": null
+    },
+    {
+      "id": "camara:160629",
+      "nome": "Romero Rodrigues",
+      "cargo": "Deputado(a) federal",
+      "orgao": "Câmara dos Deputados",
+      "poder": "Legislativo",
+      "uf": "PB",
+      "partido": "PODE",
+      "foto": "https://www.camara.leg.br/internet/deputado/bandep/160629.jpg",
+      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/160629",
       "remuneracao": null,
       "inicio": null
     },
