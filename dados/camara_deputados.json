@@ -1,8 +1,8 @@
 {
   "source": "Câmara dos Deputados",
   "url": "https://dadosabertos.camara.leg.br/api/v2/deputados?itens=100&ordem=ASC&ordenarPor=nome",
-  "fetchedAt": "2026-11-18T18:09:54.982Z",
-  "hash": "14351a0bc72ed0efdd0f51cca80ec77f782de6522439e326377df358ee06aacf",
+  "fetchedAt": "2026-11-19T18:22:12.247Z",
+  "hash": "e43a88591b3df3f46552ed3385c22f34664e4d61d471d1d1fba88033e8ef35a5",
   "count": 513,
   "records": [
     {
@@ -236,6 +236,19 @@
       "partido": "CIDADANIA",
       "foto": "https://www.camara.leg.br/internet/deputado/bandep/178972.jpg",
       "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/178972",
+      "remuneracao": null,
+      "inicio": null
+    },
+    {
+      "id": "camara:204571",
+      "nome": "Alex Santana",
+      "cargo": "Deputado(a) federal",
+      "orgao": "Câmara dos Deputados",
+      "poder": "Legislativo",
+      "uf": "BA",
+      "partido": "REPUBLICANOS",
+      "foto": "https://www.camara.leg.br/internet/deputado/bandep/204571.jpg",
+      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/204571",
       "remuneracao": null,
       "inicio": null
     },
@@ -4214,19 +4227,6 @@
       "partido": "PL",
       "foto": "https://www.camara.leg.br/internet/deputado/bandep/133810.jpg",
       "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/133810",
-      "remuneracao": null,
-      "inicio": null
-    },
-    {
-      "id": "camara:204558",
-      "nome": "Marcelo Nilo",
-      "cargo": "Deputado(a) federal",
-      "orgao": "Câmara dos Deputados",
-      "poder": "Legislativo",
-      "uf": "BA",
-      "partido": "REPUBLICANOS",
-      "foto": "https://www.camara.leg.br/internet/deputado/bandep/204558.jpg",
-      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/204558",
       "remuneracao": null,
       "inicio": null
     },

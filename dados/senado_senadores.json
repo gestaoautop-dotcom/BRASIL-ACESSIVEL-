@@ -1,9 +1,9 @@
 {
   "source": "Senado Federal",
   "url": "https://legis.senado.leg.br/dadosabertos/senador/lista/atual.json",
-  "fetchedAt": "2026-11-18T18:09:54.982Z",
-  "hash": "d0954d4a7a86c8b46cc677f533a14ce3335d4f6d06d9bf823ee12fc004567ea8",
-  "count": 81,
+  "fetchedAt": "2026-11-19T18:22:12.247Z",
+  "hash": "eda0f0423fc539721b6e6e0431532fb2ad7f579e3cf1c4c153b7f7f0f5275b63",
+  "count": 82,
   "records": [
     {
       "id": "senado:5672",
@@ -544,7 +544,7 @@
       "cargo": "Senador(a)",
       "orgao": "Senado Federal",
       "poder": "Legislativo",
-      "uf": "PI",
+      "uf": null,
       "partido": "PSD",
       "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6369.jpg",
       "fonte": "https://legis.senado.leg.br/dadosabertos/senador/6369.json",
@@ -990,6 +990,19 @@
       "partido": "MDB",
       "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5748.jpg",
       "fonte": "https://legis.senado.leg.br/dadosabertos/senador/5748.json",
+      "remuneracao": null,
+      "inicio": null
+    },
+    {
+      "id": "senado:5016",
+      "nome": "Wellington Dias",
+      "cargo": "Senador(a)",
+      "orgao": "Senado Federal",
+      "poder": "Legislativo",
+      "uf": "PI",
+      "partido": "PT",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5016.jpg",
+      "fonte": "https://legis.senado.leg.br/dadosabertos/senador/5016.json",
       "remuneracao": null,
       "inicio": null
     },
