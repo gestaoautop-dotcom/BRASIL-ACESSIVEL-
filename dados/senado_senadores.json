@@ -1,9 +1,9 @@
 {
   "source": "Senado Federal",
   "url": "https://legis.senado.leg.br/dadosabertos/senador/lista/atual.json",
-  "fetchedAt": "2026-11-19T18:22:12.247Z",
-  "hash": "eda0f0423fc539721b6e6e0431532fb2ad7f579e3cf1c4c153b7f7f0f5275b63",
-  "count": 82,
+  "fetchedAt": "2026-11-20T17:52:31.035Z",
+  "hash": "632ace348c459c0d1137639c1df24382dcef0932659d0d372d2bab3c4f6e3231",
+  "count": 81,
   "records": [
     {
       "id": "senado:5672",
@@ -535,19 +535,6 @@
       "partido": "PL",
       "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6342.jpg",
       "fonte": "https://legis.senado.leg.br/dadosabertos/senador/6342.json",
-      "remuneracao": null,
-      "inicio": null
-    },
-    {
-      "id": "senado:6369",
-      "nome": "Jussara Lima",
-      "cargo": "Senador(a)",
-      "orgao": "Senado Federal",
-      "poder": "Legislativo",
-      "uf": null,
-      "partido": "PSD",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6369.jpg",
-      "fonte": "https://legis.senado.leg.br/dadosabertos/senador/6369.json",
       "remuneracao": null,
       "inicio": null
     },
