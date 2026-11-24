@@ -1,8 +1,8 @@
 {
   "source": "Câmara dos Deputados",
   "url": "https://dadosabertos.camara.leg.br/api/v2/deputados?itens=100&ordem=ASC&ordenarPor=nome",
-  "fetchedAt": "2026-11-23T21:30:12.866Z",
-  "hash": "aca87a2ef38d8ce96884a3ca967e3cdc16b4ad3097bd8df678ec6c8338474a47",
+  "fetchedAt": "2026-11-24T20:13:06.772Z",
+  "hash": "648fb90198c0364ede662caa3e7ea4c86dc5b55a3e5bc16368f784baa87881fd",
   "count": 513,
   "records": [
     {
@@ -2775,19 +2775,6 @@
       "inicio": null
     },
     {
-      "id": "camara:74383",
-      "nome": "Giacobo",
-      "cargo": "Deputado(a) federal",
-      "orgao": "Câmara dos Deputados",
-      "poder": "Legislativo",
-      "uf": "PR",
-      "partido": "PSD",
-      "foto": "https://www.camara.leg.br/internet/deputado/bandep/74383.jpg",
-      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/74383",
-      "remuneracao": null,
-      "inicio": null
-    },
-    {
       "id": "camara:204491",
       "nome": "Gilberto Abramo",
       "cargo": "Deputado(a) federal",
@@ -3174,6 +3161,19 @@
       "partido": "MDB",
       "foto": "https://www.camara.leg.br/internet/deputado/bandep/204436.jpg",
       "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/204436",
+      "remuneracao": null,
+      "inicio": null
+    },
+    {
+      "id": "camara:225846",
+      "nome": "Itamar Paim",
+      "cargo": "Deputado(a) federal",
+      "orgao": "Câmara dos Deputados",
+      "poder": "Legislativo",
+      "uf": "PR",
+      "partido": "PL",
+      "foto": "https://www.camara.leg.br/internet/deputado/bandep/225846.jpg",
+      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/225846",
       "remuneracao": null,
       "inicio": null
     },
