@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-24T20:13:06.772Z",
+  "updatedAt": "2026-11-25T19:23:25.048Z",
   "status": {
     "camara_deputados": "ok",
     "senado_senadores": "ok"
@@ -11,8 +11,8 @@
       "name": "Câmara dos Deputados",
       "sourceUrl": "https://dadosabertos.camara.leg.br/api/v2/deputados?itens=100&ordem=ASC&ordenarPor=nome",
       "count": 513,
-      "fetchedAt": "2026-11-24T20:13:06.772Z",
-      "hash": "648fb90198c0364ede662caa3e7ea4c86dc5b55a3e5bc16368f784baa87881fd",
+      "fetchedAt": "2026-11-25T19:23:25.048Z",
+      "hash": "d260c90006a90bb9ff3a87d3f153e7d7b62011637dd8543677af4bd27835d603",
       "status": "ok"
     },
     {
@@ -20,7 +20,7 @@
       "name": "Senado Federal",
       "sourceUrl": "https://legis.senado.leg.br/dadosabertos/senador/lista/atual.json",
       "count": 81,
-      "fetchedAt": "2026-11-24T20:13:06.772Z",
+      "fetchedAt": "2026-11-25T19:23:25.048Z",
       "hash": "632ace348c459c0d1137639c1df24382dcef0932659d0d372d2bab3c4f6e3231",
       "status": "ok"
     }

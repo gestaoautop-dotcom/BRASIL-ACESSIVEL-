@@ -1,8 +1,8 @@
 {
   "source": "Câmara dos Deputados",
   "url": "https://dadosabertos.camara.leg.br/api/v2/deputados?itens=100&ordem=ASC&ordenarPor=nome",
-  "fetchedAt": "2026-11-24T20:13:06.772Z",
-  "hash": "648fb90198c0364ede662caa3e7ea4c86dc5b55a3e5bc16368f784baa87881fd",
+  "fetchedAt": "2026-11-25T19:23:25.048Z",
+  "hash": "d260c90006a90bb9ff3a87d3f153e7d7b62011637dd8543677af4bd27835d603",
   "count": 513,
   "records": [
     {
@@ -4484,7 +4484,7 @@
       "orgao": "Câmara dos Deputados",
       "poder": "Legislativo",
       "uf": "MA",
-      "partido": "PRD",
+      "partido": "PODE",
       "foto": "https://www.camara.leg.br/internet/deputado/bandep/204566.jpg",
       "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/204566",
       "remuneracao": null,
