@@ -1,8 +1,8 @@
 {
   "source": "Câmara dos Deputados",
   "url": "https://dadosabertos.camara.leg.br/api/v2/deputados?itens=100&ordem=ASC&ordenarPor=nome",
-  "fetchedAt": "2026-11-26T19:07:01.287Z",
-  "hash": "d260c90006a90bb9ff3a87d3f153e7d7b62011637dd8543677af4bd27835d603",
+  "fetchedAt": "2026-11-27T19:02:52.506Z",
+  "hash": "985ee7a4f6457b66a618eb96e51f782268902c30c59948ade578622aff9ff974",
   "count": 513,
   "records": [
     {
@@ -3139,6 +3139,19 @@
       "inicio": null
     },
     {
+      "id": "camara:74295",
+      "nome": "Inácio Arruda",
+      "cargo": "Deputado(a) federal",
+      "orgao": "Câmara dos Deputados",
+      "poder": "Legislativo",
+      "uf": "CE",
+      "partido": "PCdoB",
+      "foto": "https://www.camara.leg.br/internet/deputado/bandep/74295.jpg",
+      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/74295",
+      "remuneracao": null,
+      "inicio": null
+    },
+    {
       "id": "camara:98615",
       "nome": "Ismael",
       "cargo": "Deputado(a) federal",
@@ -3421,19 +3434,6 @@
       "partido": "PT",
       "foto": "https://www.camara.leg.br/internet/deputado/bandep/141464.jpg",
       "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/141464",
-      "remuneracao": null,
-      "inicio": null
-    },
-    {
-      "id": "camara:141470",
-      "nome": "José Guimarães",
-      "cargo": "Deputado(a) federal",
-      "orgao": "Câmara dos Deputados",
-      "poder": "Legislativo",
-      "uf": "CE",
-      "partido": "PT",
-      "foto": "https://www.camara.leg.br/internet/deputado/bandep/141470.jpg",
-      "fonte": "https://dadosabertos.camara.leg.br/api/v2/deputados/141470",
       "remuneracao": null,
       "inicio": null
     },
