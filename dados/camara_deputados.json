@@ -1,7 +1,7 @@
 {
   "source": "Câmara dos Deputados",
   "url": "https://dadosabertos.camara.leg.br/api/v2/deputados?itens=100&ordem=ASC&ordenarPor=nome",
-  "fetchedAt": "2026-11-27T19:02:52.506Z",
+  "fetchedAt": "2026-11-28T17:37:43.640Z",
   "hash": "985ee7a4f6457b66a618eb96e51f782268902c30c59948ade578622aff9ff974",
   "count": 513,
   "records": [
